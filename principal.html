@@ -296,7 +296,7 @@
                 filas[i].style.display = mostrar ? "" : "none";
             }
         }
-        const API_URL = import.meta.env.VIPE_API_URL || "https://mi-backend-production-9444.up.railway.app";
+        const API_URL = "https://mi-backend-production-9444.up.railway.app";
         fetch(`${API_URL}/api/medidores`)
             .then(response => {
                 if (!response.ok) {
@@ -358,7 +358,7 @@
         setInterval(cargarDatosDesdePHP, 10000); // Actualiza cada 10 segundos
 
     </script>
-    <script src="/frontend/js/login.js"></script>
+    <script src="/js/login.js"></script>
 
 </body>
 
