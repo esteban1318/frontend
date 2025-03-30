@@ -1,0 +1,321 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .table-container {
+        position: absolute;
+        top: 110px;
+        /* Ajusta la distancia desde la parte superior */
+        left: -190px;
+        /* Ajusta la posición desde la izquierda */
+        width: 100%;
+        /* Que no ocupe toda la pantalla */
+    }
+
+    .residents-table {
+        width: 100%;
+    }
+
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 80%;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: #2c3e50;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #2c3e50;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1100;
+    }
+
+    .main-content {
+        margin-left: 10px;
+        width: 95%;
+    }
+}
+
+
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 200px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+
+#logo {
+    width: 90px;
+    margin-left: 50px;
+
+}
+
+.icono1 {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    /* Lo fija en la esquina derecha */
+    width: 50px;
+    /* Ajusta el tamaño según necesites */
+    height: auto;
+    z-index: 1000;
+
+}
+
+.sidebar-header h2 {
+    margin: 0;
+}
+
+.search-container {
+    margin-top: 20px;
+}
+
+.search-input {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav ul li {
+    padding: 10px;
+    margin: 5px 0;
+
+    border-radius: 5px;
+}
+
+.sidebar-nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+li {
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+li:hover {
+    transform: scale(1.1);
+}
+
+.sidebar-footer {
+    margin-top: 160px;
+    margin-left: 20%;
+
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+
+}
+
+#textHeader {
+    color: #34495e;
+    text-shadow: 2px 1px 5px;
+    font-style: italic;
+}
+
+.stats-container {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-card {
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1;
+}
+
+.table-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.residents-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+th {
+    background-color: #cdcfd0;
+}
+
+.residents-table th,
+.residents-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.estado.activo {
+    color: green;
+}
+
+.estado.inactivo {
+    color: red;
+}
+
+#cerrarSesion {
+    color: inherit;
+    text-decoration: none;
+}
+
+#textAdmResidentes {
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+#tabla-recibos {
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 280px;
+    width: 70%;
+}
+
+.table-container {
+    max-height: 500px;
+    overflow-y: hidden;
+}
+
+.contenedorTabla {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+}
+
+.contenedorTabla thead {
+    position: sticky;
+    top: 0;
+    background-color: #cdcfd0;
+    z-index: 2;
+}
+
+.contenedorTabla table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#contenedor-registros {
+    position: relative;
+    margin-top: 20px;
+    margin-right: 450px;
+    background-color: #006064;
+    width: 300vh;
+    border-radius: 13px;
+    height: 90vh;
+    text-align: center;
+    padding: 10px;
+}
+
+#tituloContainerRegister {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.containerFecha {
+    margin-top: 20px;
+    text-align: left;
+
+}
+
+.containerApartamento {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#inputFecha {
+    width: 300px;
+    margin-top: 5px;
+    border: solid #2c3e50;
+
+
+}
+
+#inputTorre {
+    width: 30px;
+    margin-top: 20px;
+    border: solid #2c3e50;
+
+}
+
+#inputInmueble {
+    width: 100px;
+    margin-top: 20px;
+    border: solid #2c3e50;
+}
+
+#inputNombre {
+    margin-top: 20px;
+    border: solid #2c3e50;
+    width: 300px;
+
+}
+
+.containerNombre {
+    text-align: left;
+}
+
+.btnRegister {
+    position: relative;
+    margin-top: 280px;
+    margin-right: -270px;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(55, 185, 55);
+    padding: 3px;
+    cursor: pointer;
+}
+
+.estado-entregado {
+    color: green;
+    /* Hace que "Entregado" sea verde */
+    font-weight: bold;
+}

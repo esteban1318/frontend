@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('https://img.freepik.com/vector-gratis/fondo-lineas-dinamicas-estilo-papel_23-2149008629.jpg?t=st=1742001745~exp=1742005345~hmac=45f5401589fd3db6bd6cd50e1750d22a87cb2b35514ef4753d7144d1560be88b&w=1380');
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+
+}
+
+.login-container {
+
+    text-align: left;
+    background-image: url('imagenes/5961.jpg');
+    /* Fondo naranja para el contenedor de login */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(24, 11, 66, 0.5);
+    /* Negro con 50% de transparencia */
+    background-blend-mode: overlay;
+    /* Mezcla la transparencia con la imagen */
+    margin: 0;
+    padding: 80px;
+    /* Espaciado interno dentro del contenedor */
+    border-radius: 15px;
+    /* Bordes redondeados para un diseño más suave */
+
+    width: 180px;
+    /* Ancho fijo para mantener el diseño consistente */
+    margin-top: 90px;
+    /* Mueve hacia abajo */
+    margin-left: 800px;
+    /* Mueve hacia la derecha */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra para profundidad */
+}
+
+h3 {
+    color: rgb(39, 49, 239);
+    ;
+}
+
+label {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(39, 49, 239);
+}
+
+input {
+    display: block;
+    background-color: rgba(80, 80, 189, 0.906);
+    margin-bottom: 5px;
+    border-radius: 10px;
+
+}
+
+button {
+    font-size: 20px;
+    color: rgb(39, 49, 239);
+    border-radius: 20px;
+    margin-top: 20px;
+    /* Desplaza hacia abajo */
+    margin-left: 50px;
+    /* Desplaza hacia la derecha */
+    margin-right: 20px;
+    /* Desplaza hacia la izquierda */
+}
+
+#textCenterContainer {
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    top: 65px;
+    /* Alinea arriba */
+    right: 160px;
+    /* Alinea a la derecha */
+    padding: 10px;
+    /* Espaciado del borde */
+    cursor: pointer;
+
+}
+
+#home {
+    color: rgba(255, 255, 255, 0.795);
+    position: fixed;
+    top: 9px;
+    left: 40px;
+}
+
+#help {
+    color: rgba(255, 255, 255, 0.795);
+    position: fixed;
+    top: 10px;
+    left: 170px;
+    /*  right: 400px; */
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+#iconoWhatsapp {
+    width: 30px;
+    height: 28px;
+    cursor: pointer;
+
+}
+
+#iconoGithub {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.piePagina {
+    position: fixed;
+    bottom: 10px;
+}
