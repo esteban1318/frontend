@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Residentes</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script>
+        // Redirigir al login si no está autenticado
+        if (!localStorage.getItem("usuarioLogueado")) {
+            window.location.href = "index.html"; // O el nombre de tu login
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="imagenes2/1.png" alt="" id="logo">
+                <p id="textAdmResidentes">Administración de Residentes</p>
+            </div>
+            <div class="search-container">
+                <input type="text" id="busqueda" placeholder="Buscar..." class="search-input" onkeyup="filtrarTabla()">
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><span class="icon">🏠</span> Inicio</a></li>
+                    <li><a href="#"><span class="icon">👤</span> Residentes</a></li>
+                    <li><a href="#"><span class="icon">🏢</span> Recibos</a></li>
+                    <li><a href="#"><span class="icon">📊</span> Registros</a></li>
+                    <li><a href="#"><span class="icon">⚙️</span> Configuración</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <footer class="sidebar-footer-content">
+                    <a id="cerrarSesion" href="#"><span class="icon">🚪</span> Cerrar Sesión</a>
+                </footer>
+            </div>
+        </div>
+        <div class="main-content">
+            <header class="main-header" id="dashboardHeader">
+                <h1 id="textHeader">Dashboard de Residentes</h1>
+                <div id="gifContainer">
+                    <img class="icono1" src="imagenes2/circuito-cerrado-de-television (1).gif" id="gif" />
+                </div>
+            </header>
+            <div class="stats-container" id="statusContainer">
+                <div class="stat-card">
+                    <h3>Total Residentes</h3>
+                    <p class="stat-number" style="color: rgb(53, 43, 241);">254</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Edificios</h3>
+                    <p class="stat-number" style="color: rgb(53, 43, 241);">8</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Residentes Activos</h3>
+                    <p class="stat-number" style="color: rgb(53, 43, 241);">218</p>
+                </div>
+            </div>
+            <div class="table-container" id="tabla-residentes">
+                <h2>Lista de Residentes</h2>
+                <table id="miTabla" class="residents-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edificio</th>
+                            <th>Apartamento</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Pérez</td>
+
+                            <td>Torre A</td>
+                            <td>301</td>
+                            <td><span class="estado activo">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>María López</td>
+
+                            <td>Torre B</td>
+                            <td>205</td>
+                            <td><span class="estado activo">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Carlos Rodríguez</td>
+
+                            <td>Torre A</td>
+                            <td>102</td>
+                            <td><span class="estado inactivo">Inactivo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ana Martínez</td>
+
+                            <td>Torre C</td>
+                            <td>401</td>
+                            <td><span class="estado activo">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Luis González</td>
+
+                            <td>Torre B</td>
+                            <td>307</td>
+                            <td><span class="estado activo">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sofía Torres</td>
+
+                            <td>Torre A</td>
+                            <td>201</td>
+                            <td><span class="estado inactivo">Inactivo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="table-container hidden" id="tabla-recibos">
+        <h2>Lista de Recibos</h2>
+        <div class="contenedorTabla">
+            <table id="miTabla2" class="residents-table">
+                <thead>
+                    <tr>
+                        <th>Torre</th>
+                        <th>Apartamento</th>
+                        <th>Medidor</th>
+                        <th class="clumnaEstado">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="content-container hidden" id="contenedor-registros">
+        <h1 id="tituloContainerRegister">Nuevo propietario</h1>
+
+        <!-- Fecha de entrega -->
+        <div class="containerFecha">
+            <label for="inputFecha">Fecha de entrega</label>
+            <input type="text" id="inputFecha" />
+        </div>
+
+        <!-- Datos del Apartamento -->
+        <div class="containerApartamento">
+            <div>
+                <label for="inputTorre">Torre:</label>
+                <input type="number" id="inputTorre" />
+            </div>
+            <div>
+                <label for="inputInmueble">Inmueble:</label>
+                <input type="number" id="inputInmueble" />
+            </div>
+        </div>
+
+        <!-- Nombre del Propietario -->
+        <div class="containerNombre">
+            <label for="inputNombre">Nombre completo</label>
+            <input type="text" id="inputNombre">
+        </div>
+
+        <button class="btnRegister">Registrar</button>
+    </div>
+
+
+    <script>
+        function filtrarTabla() {
+            let input = document.getElementById("busqueda");
+            let filtro = input.value.toLowerCase();
+            let tabla = document.getElementById("miTabla");
+            let filas = tabla.getElementsByTagName("tr");
+
+            for (let i = 1; i < filas.length; i++) { // Comenzamos en 1 para evitar el encabezado
+                let celdas = filas[i].getElementsByTagName("td");
+                let mostrar = false;
+
+                for (let j = 0; j < celdas.length; j++) {
+                    if (celdas[j].innerText.toLowerCase().includes(filtro)) {
+                        mostrar = true;
+                        break;
+                    }
+                }
+
+                filas[i].style.display = mostrar ? "" : "none";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuInicio = document.querySelector(".sidebar-nav li:nth-child(1) a");
+            const menuResidentes = document.querySelector(".sidebar-nav li:nth-child(2) a");
+            const menuRecibos = document.querySelector(".sidebar-nav li:nth-child(3) a");
+            const menuRegistros = document.querySelector(".sidebar-nav li:nth-child(4) a");
+
+            const tablaResidentes = document.getElementById("tabla-residentes");
+            const tablaRecibos = document.getElementById("tabla-recibos");
+            const contenedorRegistros = document.getElementById("contenedor-registros");
+
+            const textHeader = document.getElementById("textHeader"); // Título principal del Dashboard
+            const statsContainer = document.getElementById("statusContainer"); // Tarjetas de estadísticas
+
+            function mostrarSeccion(seccionMostrada) {
+                // Ocultar todas las secciones
+                tablaResidentes.classList.add("hidden");
+                tablaRecibos.classList.add("hidden");
+                contenedorRegistros.classList.add("hidden");
+
+                // Mostrar solo la sección correspondiente
+                seccionMostrada.classList.remove("hidden");
+
+                // Configurar visibilidad del encabezado y estadísticas
+                if (seccionMostrada === contenedorRegistros) {
+                    textHeader.style.display = "none"; // Ocultar el título
+                    statsContainer.style.display = "none"; // Ocultar estadísticas
+                } else {
+                    textHeader.style.display = "block"; // Mostrar título
+                    statsContainer.style.display = "flex"; // Mostrar estadísticas
+                }
+            }
+
+            // Eventos de los botones del menú
+            menuInicio.addEventListener("click", function (event) {
+                event.preventDefault();
+                textHeader.style.display = "block";
+                statsContainer.style.display = "flex";
+                tablaResidentes.classList.add("hidden");
+                tablaRecibos.classList.add("hidden");
+                contenedorRegistros.classList.add("hidden");
+            });
+
+            menuResidentes.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(tablaResidentes);
+            });
+
+            menuRecibos.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(tablaRecibos);
+            });
+
+            menuRegistros.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(contenedorRegistros);
+            });
+        });
+
+        function filtrarTabla() {
+            let input = document.getElementById("busqueda");
+            let filtro = input.value.toLowerCase().trim();
+
+            // Detectar qué tabla está visible
+            let tablaResidentes = document.getElementById("tabla-residentes");
+            let tablaRecibos = document.getElementById("tabla-recibos");
+
+            let tabla;
+            if (!tablaResidentes.classList.contains("hidden")) {
+                tabla = document.getElementById("miTabla"); // Residentes
+            } else if (!tablaRecibos.classList.contains("hidden")) {
+                tabla = document.getElementById("miTabla2"); // Recibos
+            }
+
+            if (!tabla) {
+                console.error("No se encontró ninguna tabla visible.");
+                return;
+            }
+
+            let filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+            for (let i = 0; i < filas.length; i++) {
+                let celdas = filas[i].getElementsByTagName("td");
+                let mostrar = false;
+
+                for (let j = 0; j < celdas.length; j++) {
+                    let textoCelda = celdas[j].textContent || celdas[j].innerText;
+                    if (textoCelda.toLowerCase().includes(filtro)) {
+                        mostrar = true;
+                        break;
+                    }
+                }
+
+                filas[i].style.display = mostrar ? "" : "none";
+            }
+        }
+        fetch("https://mi-backend-production-9444.up.railway.app/api/medidores")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Datos recibidos:", data);
+                // Aquí colocas el código para llenar la tabla o hacer algo con los datos
+            })
+            .catch(error => console.error("Error cargando datos:", error));
+
+
+        function actualizarTabla(medidores) {
+            const tabla = document.getElementById("tabla-medidores"); // Asegúrate de tener una tabla con este ID
+            const tbody = tabla.querySelector("tbody");
+            tbody.innerHTML = ""; // Limpiar contenido anterior
+
+            medidores.forEach(medidor => {
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+            <td>${medidor.id}</td>
+            <td>${medidor.torre}</td>
+            <td>${medidor.apartamento}</td>
+            <td>${medidor.medidor}</td>
+            <td>${medidor.estado}</td>
+        `;
+                tbody.appendChild(fila);
+            });
+        }
+
+
+        function cargarDatosDesdePHP() {
+            fetch("https://mi-backend-production-9444.up.railway.app/medidores")
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Datos recibidos:", data); // Verificar en consola
+
+                    const tbody = document.querySelector("#miTabla2 tbody");
+                    tbody.innerHTML = ""; // Limpiar la tabla
+
+                    data.forEach(recibo => {
+                        let claseEstado = recibo.estado.trim() === "Entregado" ? "estado-entregado" : "";
+
+                        let fila = document.createElement("tr");
+                        fila.innerHTML = `
+                    <td>${recibo.torre}</td>
+                    <td>${recibo.apartamento}</td>
+                    <td>${recibo.medidor}</td>
+                    <td class="${claseEstado}">${recibo.estado}</td>
+                `;
+                        tbody.appendChild(fila);
+                    });
+                })
+                .catch(error => console.error("Error cargando datos:", error));
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
+        setInterval(cargarDatosDesdePHP, 10000); // Actualiza cada 10 segundos
+
+    </script>
+    <script src="/frontend/js/login.js"></script>
+
+</body>
+
+</html>
