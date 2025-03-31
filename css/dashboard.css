@@ -20,6 +20,11 @@ body {
     /* Oculto por defecto */
 }
 
+.mobile-search-container .search-input {
+    display: none;
+}
+
+
 @media screen and (max-width: 768px) {
     body {
         background-color: white;
@@ -27,7 +32,7 @@ body {
 
     .table-container {
         position: absolute;
-        top: 200px;
+        top: 250px;
         /* Ajusta la distancia desde la parte superior */
         left: 18px;
         /* Ajusta la posición desde la izquierda */
@@ -48,15 +53,27 @@ body {
     }
 
     #tabla-recibos {
-        position: absolute;
-        top: 20px;
-        /* Ajusta la distancia desde la parte superior */
-        left: -210px;
-        /* Ajusta la posición desde la izquierda */
-        width: 120%;
-        /* Que no ocupe toda la pantalla */
-        font-size: 12px;
+        position: relative;
+        /* En vez de absolute */
+        top: 50px;
+        left: -250px;
+        /* Centrar */
+        width: 100%;
+        /* Que ocupe todo el contenedor */
+        max-width: 100%;
+        /* Evitar que se expanda más de lo necesario */
+        font-size: 14px;
+        /* Aumentar tamaño de fuente */
+        overflow-x: auto;
+        /* Permitir desplazamiento horizontal si es necesario */
+
     }
+
+    #tabla-recibos {
+        min-width: 90vw;
+        /* Hace que la tabla sea más ancha */
+    }
+
 
     #textHeader {
         font-size: 18px;
@@ -80,9 +97,14 @@ body {
         transition: transform 0.3s ease-in-out;
     }
 
+    .sidebar .search-container {
+        display: none;
+    }
+
     /* Cuando el menú se active, se mostrará */
     .sidebar.show {
         transform: translateX(0);
+        z-index: 1000;
     }
 
     /* Asegurar que el botón solo aparezca en móvil */
@@ -101,6 +123,26 @@ body {
         height: 35px;
         font-size: 20px;
         border: none;
+    }
+
+    .mobile-search-container {
+        display: block;
+        position: absolute;
+        top: 230px;
+        left: 46%;
+        transform: translateX(-50%);
+        width: 80%;
+        z-index: 900;
+
+    }
+
+    .mobile-search-container .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #006064;
+        border-radius: 5px;
+        font-size: 14px;
+        display: block;
     }
 }
 

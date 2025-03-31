@@ -16,6 +16,11 @@
 </head>
 
 <body>
+    <!-- Input de búsqueda exclusivo para móviles -->
+    <div class="mobile-search-container">
+        <input type="text" id="busqueda-movil" placeholder="Buscar..." class="search-input" onkeyup="filtrarTabla()">
+    </div>
+
     <div class="dashboard-container">
         <button id="menu-toggle" class="menu-toggle">☰</button>
         <div class="sidebar" id="sidebar">
@@ -184,6 +189,8 @@
     <script>
         function filtrarTabla() {
             let input = document.getElementById("busqueda");
+            let input2 = document.getElementById("busqueda-movil");
+            // Usar el input de búsqueda móvil si está visible, de lo contrario usar el input de escritorio
             let filtro = input.value.toLowerCase();
             let tabla = document.getElementById("miTabla");
             let filas = tabla.getElementsByTagName("tr");
@@ -262,7 +269,8 @@
 
         function filtrarTabla() {
             let input = document.getElementById("busqueda");
-            let filtro = input.value.toLowerCase().trim();
+            let input2 = document.getElementById("busqueda-movil");
+            let filtro = (input.value || input2.value).toLowerCase().trim(); // Obtener el valor del filtro de ambos inputs
 
             // Detectar qué tabla está visible
             let tablaResidentes = document.getElementById("tabla-residentes");
