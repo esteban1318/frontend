@@ -21,6 +21,52 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+    body {
+        background-color: white;
+    }
+
+    .table-container {
+        position: absolute;
+        top: 200px;
+        /* Ajusta la distancia desde la parte superior */
+        left: 18px;
+        /* Ajusta la posición desde la izquierda */
+        width: 90%;
+        /* Que no ocupe toda la pantalla */
+        font-size: 8px;
+    }
+
+    .stats-container {
+        position: absolute;
+        top: 100px;
+        /* Ajusta la distancia desde la parte superior */
+        left: 18px;
+        /* Ajusta la posición desde la izquierda */
+        width: 90%;
+        /* Que no ocupe toda la pantalla */
+        font-size: 10px;
+    }
+
+    #tabla-recibos {
+        position: absolute;
+        top: 20px;
+        /* Ajusta la distancia desde la parte superior */
+        left: -210px;
+        /* Ajusta la posición desde la izquierda */
+        width: 120%;
+        /* Que no ocupe toda la pantalla */
+        font-size: 12px;
+    }
+
+    #textHeader {
+        font-size: 18px;
+        text-align: lef -18px;
+    }
+
+    .residents-table {
+        width: 100%;
+    }
+
     .sidebar {
         width: 80%;
         height: 100vh;
@@ -57,6 +103,7 @@ body {
         border: none;
     }
 }
+
 
 .dashboard-container {
     display: flex;
