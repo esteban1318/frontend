@@ -1,6 +1,8 @@
 body {
     margin: 0;
     background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('https://img.freepik.com/vector-gratis/fondo-lineas-dinamicas-estilo-papel_23-2149008629.jpg?t=st=1742001745~exp=1742005345~hmac=45f5401589fd3db6bd6cd50e1750d22a87cb2b35514ef4753d7144d1560be88b&w=1380');
+    background-repeat: no-repeat;
+    background-size: cover;
     justify-content: center;
     align-items: center;
     height: 100vh;
