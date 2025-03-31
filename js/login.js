@@ -9,8 +9,6 @@ function validarLogin() {
     let mensaje = document.getElementById("mensaje");
 
     if (user === usuario && pass === contraseña) {
-        mensaje.textContent = "Login exitoso";
-
         // Guardar sesión en localStorage
         localStorage.setItem("usuarioLogueado", "true");
 
@@ -19,5 +17,6 @@ function validarLogin() {
         }, 200);
     } else {
         mensaje.textContent = "Usuario o contraseña incorrecta";
+        mensaje.style.color = "red";
     }
 }
