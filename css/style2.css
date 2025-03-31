@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('https://img.freepik.com/foto-gratis/render-3d-fondo-tecnologia-diseno-estructura-comunicaciones-red_1048-13621.jpg?t=st=1743391218~exp=1743394818~hmac=33901d3a8c317f360424bfc8f32ad7db9012ffa852d5cce51cbd6667f7c82955&w=1380');
+    background-color: #05080D;
+    background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
