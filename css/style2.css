@@ -1,129 +1,169 @@
-body {
-    margin: 0;
-    background-color: #05080D;
-    background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+ body {
+     margin: 0;
+     background-color: #05080D;
+     background-image: linear-gradient(to right, rgba(106, 69, 200, 0.253), rgba(7, 7, 29, 0.943)), url('');
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
 
 
 
 
-}
+ }
 
-.login-container {
 
-    text-align: left;
-    background-image: url('imagenes/5961.jpg');
-    /* Fondo naranja para el contenedor de login */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: rgba(24, 11, 66, 0.5);
-    /* Negro con 50% de transparencia */
-    background-blend-mode: overlay;
-    /* Mezcla la transparencia con la imagen */
-    margin: 0;
-    padding: 80px;
-    /* Espaciado interno dentro del contenedor */
-    border-radius: 15px;
-    /* Bordes redondeados para un diseño más suave */
+ /* 🔹 Estilos base del contenedor */
+ .login-container {
+     text-align: left;
+     background-image: url('imagenes/5961.jpg');
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-color: rgba(24, 11, 66, 0.5);
+     background-blend-mode: overlay;
+     padding: 40px;
+     /* Reducido */
+     border-radius: 15px;
+     width: 350px;
+     /* Ajuste base */
+     max-width: 90%;
+     /* Para evitar que sea muy grande en móviles */
+     margin: 2vh 10vh;
+     /* Centrado en la pantalla */
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+ }
 
-    width: 180px;
-    /* Ancho fijo para mantener el diseño consistente */
-    margin-top: 90px;
-    /* Mueve hacia abajo */
-    margin-left: 800px;
-    /* Mueve hacia la derecha */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    /* Sombra para profundidad */
-}
+ #textCenterContainer {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
+     margin-top: -5px;
+ }
 
-h3 {
-    color: rgb(39, 49, 239);
-    ;
-}
+ h3 {
+     color: rgb(39, 49, 239);
+     ;
+ }
 
-label {
-    font-size: 20px;
-    display: block;
-    margin-bottom: 5px;
-    color: rgb(39, 49, 239);
-}
+ label {
+     font-size: 20px;
+     display: block;
+     margin-bottom: 5px;
+     color: rgb(39, 49, 239);
+ }
 
-input {
-    display: block;
-    background-color: rgba(80, 80, 189, 0.906);
-    margin-bottom: 5px;
-    border-radius: 10px;
+ /* 🔹 Estilos de los inputs y botones */
+ input {
+     width: 100%;
+     /* Para que ocupen el ancho completo */
+     padding: 10px;
+     margin: 8px 0;
+     border-radius: 10px;
+     border: none;
+     background-color: cadetblue;
+     border: solid 2px;
+ }
 
-}
+ button {
+     justify-content: center;
+     align-items: center;
+     width: 30%;
+     /* Para que ocupen el ancho completo */
+     padding: 10px;
+     margin: 8px 0;
+     border-radius: 10px;
+     border: none;
 
-button {
-    font-size: 20px;
-    color: rgb(39, 49, 239);
-    border-radius: 20px;
-    margin-top: 20px;
-    /* Desplaza hacia abajo */
-    margin-left: 50px;
-    /* Desplaza hacia la derecha */
-    margin-right: 20px;
-    /* Desplaza hacia la izquierda */
-}
 
-#textCenterContainer {
-    color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 30px;
-    position: absolute;
-    top: 65px;
-    /* Alinea arriba */
-    right: 160px;
-    /* Alinea a la derecha */
-    padding: 10px;
-    /* Espaciado del borde */
-    cursor: pointer;
+ }
 
-}
+ button {
+     background-color: #007BFF;
+     color: white;
+     cursor: pointer;
+     font-size: 18px;
+     border-radius: 20px;
+ }
 
-#home {
-    color: rgba(255, 255, 255, 0.795);
-    position: fixed;
-    top: 9px;
-    left: 40px;
-}
+ button:hover {
+     background-color: #0056b3;
+ }
 
-#help {
-    color: rgba(255, 255, 255, 0.795);
-    position: fixed;
-    top: 10px;
-    left: 170px;
-    /*  right: 400px; */
+ /* 🔹 Ajustar la posición en vista de escritorio */
+ @media screen and (min-width: 768px) {
+     .login-container {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         /* Lo centra correctamente */
+         width: 350px;
+         /* Mantiene el tamaño en escritorio */
+     }
+ }
 
-}
+ /* 🔹 Ajustar la vista en móviles */
+ @media screen and (max-width: 480px) {
+     .login-container {
+         width: 70%;
+         /* Que no sea tan grande en móviles */
+         padding: 35px;
+         position: relative;
+         top: 100px;
+         left: -7vh;
+     }
 
-a {
-    color: white;
-    text-decoration: none;
-}
+     #textCenterContainer {
+         flex-direction: column;
+         gap: 5px;
+     }
 
-#iconoWhatsapp {
-    width: 30px;
-    height: 28px;
-    cursor: pointer;
+     input,
+     button {
+         font-size: 16px;
+     }
+ }
 
-}
+ #home {
+     color: rgba(255, 255, 255, 0.795);
+     position: fixed;
+     top: 9px;
+     left: 40px;
+ }
 
-#iconoGithub {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
+ #help {
+     color: rgba(255, 255, 255, 0.795);
+     position: fixed;
+     top: 10px;
+     left: 170px;
+     /*  right: 400px; */
 
-.piePagina {
-    position: fixed;
-    bottom: 10px;
-}
+ }
+
+ a {
+     color: white;
+     text-decoration: none;
+ }
+
+ #iconoWhatsapp {
+     width: 30px;
+     height: 28px;
+     cursor: pointer;
+
+ }
+
+ #iconoGithub {
+     width: 30px;
+     height: 30px;
+     cursor: pointer;
+ }
+
+ .piePagina {
+     position: fixed;
+     bottom: 10px;
+ }
