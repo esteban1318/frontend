@@ -17,7 +17,8 @@
 
 <body>
     <div class="dashboard-container">
-        <div class="sidebar">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <img src="imagenes2/1.png" alt="" id="logo">
                 <p id="textAdmResidentes">Administración de Residentes</p>
@@ -356,6 +357,27 @@
 
         document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
         setInterval(cargarDatosDesdePHP, 10000); // Actualiza cada 10 segundos
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("menu-toggle");
+            const sidebar = document.getElementById("sidebar");
+
+            // Verifica si existen antes de agregar eventos
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener("click", () => {
+                    sidebar.classList.toggle("show");
+                });
+
+                document.addEventListener("click", (event) => {
+                    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                        sidebar.classList.remove("show");
+                    }
+                });
+            } else {
+                console.error("Error: No se encontró el botón o la sidebar en el DOM.");
+            }
+        });
 
     </script>
     <script src="/js/login.js"></script>
