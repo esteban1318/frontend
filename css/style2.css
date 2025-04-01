@@ -116,6 +116,11 @@
          position: relative;
          top: 100px;
          left: -7vh;
+         background-color: rgba(50, 50, 50, 0.3);
+         ;
+         ;
+         backdrop-filter: blur(10px);
+         -webkit-backdrop-filter: blur(10px);
      }
 
      #textCenterContainer {
