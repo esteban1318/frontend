@@ -56,13 +56,13 @@ body {
         position: relative;
         /* En vez de absolute */
         top: 50px;
-        left: -250px;
+        left: -257px;
         /* Centrar */
         width: 100%;
         /* Que ocupe todo el contenedor */
         max-width: 100%;
         /* Evitar que se expanda más de lo necesario */
-        font-size: 14px;
+        font-size: 10px;
         /* Aumentar tamaño de fuente */
         overflow-x: auto;
         /* Permitir desplazamiento horizontal si es necesario */
