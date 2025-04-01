@@ -117,10 +117,9 @@
          top: 100px;
          left: -7vh;
          background-color: rgba(50, 50, 50, 0.3);
-         ;
-         ;
          backdrop-filter: blur(10px);
          -webkit-backdrop-filter: blur(10px);
+         box-shadow: 0 8px 16px rgba(0, 0, 0, 10);
      }
 
      #textCenterContainer {
