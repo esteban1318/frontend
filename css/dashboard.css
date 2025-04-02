@@ -407,3 +407,53 @@ th {
     /* Hace que "Entregado" sea verde */
     font-weight: bold;
 }
+
+#btnMedidor {
+    position: absolute;
+    top: 38rem;
+    right: 10%;
+    font-style: bold;
+    color: black;
+    border-radius: 6px;
+    border: solid 1.5px RGB(98, 33, 209);
+    cursor: pointer;
+
+
+}
+
+.hidden {
+    display: none;
+    /* Oculta el formulario */
+}
+
+#form-container {
+    background: rgba(30, 80, 180, 0.7);
+    backdrop-filter: transparent;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 25%;
+    right: 30%;
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(50px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 10);
+}
+
+
+
+
+label,
+select,
+input {
+    display: block;
+    width: 95%;
+    margin-bottom: 10px;
+}
+
+input,
+select {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
