@@ -291,12 +291,26 @@
             });
         });
 
+        document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
+        setInterval(actualizarTablaConFiltro, 10000); // Actualiza cada 10 segundos
+
+        function actualizarTablaConFiltro() {
+            let filtroActual = (document.getElementById("busqueda").value ||
+                document.getElementById("busqueda-movil").value).toLowerCase().trim();
+
+            cargarDatosDesdePHP(); // Actualiza la tabla con los nuevos datos
+
+            setTimeout(() => {
+                // Aplicar nuevamente el filtro después de la actualización
+                filtrarTabla();
+            }, 500); // Pequeño retraso para asegurarse de que los datos ya se actualizaron
+        }
+
         function filtrarTabla() {
             let input = document.getElementById("busqueda");
             let input2 = document.getElementById("busqueda-movil");
-            let filtro = (input.value || input2.value).toLowerCase().trim(); // Obtener el valor del filtro de ambos inputs
+            let filtro = (input.value || input2.value).toLowerCase().trim();
 
-            // Detectar qué tabla está visible
             let tablaResidentes = document.getElementById("tabla-residentes");
             let tablaRecibos = document.getElementById("tabla-recibos");
 
@@ -330,65 +344,50 @@
             }
         }
         const API_URL = "https://mi-backend-production-9444.up.railway.app";
-        fetch(`${API_URL}/api/medidores`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la respuesta del servidor");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Datos recibidos:", data);
-                // Aquí colocas el código para llenar la tabla o hacer algo con los datos
-            })
-            .catch(error => console.error("Error cargando datos:", error));
 
-        function actualizarTabla(medidores) {
-            const tabla = document.getElementById("tabla-medidores"); // Asegúrate de tener una tabla con este ID
-            const tbody = tabla.querySelector("tbody");
-            tbody.innerHTML = ""; // Limpiar contenido anterior
+
+        function actualizarFilas(medidores) {
+            let tabla = document.querySelector("#miTabla2 tbody"); // Asegúrate del ID correcto
+            if (!tabla) {
+                console.error("Error: No se encontró la tabla en el DOM.");
+                return;
+            }
+
+            let idsExistentes = new Set();
+            let filasExistentes = tabla.querySelectorAll("tr");
+
+            filasExistentes.forEach(fila => {
+                let torre = fila.cells[0]?.innerText.trim();
+                let apartamento = fila.cells[1]?.innerText.trim();
+                let medidor = fila.cells[2]?.innerText.trim();
+                let claveUnica = `${torre}-${apartamento}-${medidor}`; // Se usa como identificador único
+                if (torre && apartamento && medidor) idsExistentes.add(claveUnica);
+            });
 
             medidores.forEach(medidor => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
-            <td>${medidor.id}</td>
-            <td>${medidor.torre}</td>
-            <td>${medidor.apartamento}</td>
-            <td>${medidor.medidor}</td>
-            <td>${medidor.estado}</td>
-        `;
-                tbody.appendChild(fila);
+                let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`; // Genero la clave del nuevo dato
+
+                if (!idsExistentes.has(claveUnica)) { // Si no está en la tabla, se agrega
+                    let fila = document.createElement("tr");
+                    fila.innerHTML = `
+                <td>${medidor.torre}</td>
+                <td>${medidor.apartamento}</td>
+                <td>${medidor.medidor}</td>
+                <td class="${medidor.estado.trim() === "Entregado" ? "estado-entregado" : ""}">${medidor.estado}</td>
+            `;
+                    tabla.appendChild(fila);
+                }
             });
         }
-
-
         function cargarDatosDesdePHP() {
             fetch("https://mi-backend-production-9444.up.railway.app/medidores")
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Datos recibidos:", data); // Verificar en consola
-
-                    const tbody = document.querySelector("#miTabla2 tbody");
-                    tbody.innerHTML = ""; // Limpiar la tabla
-
-                    data.forEach(recibo => {
-                        let claseEstado = recibo.estado.trim() === "Entregado" ? "estado-entregado" : "";
-
-                        let fila = document.createElement("tr");
-                        fila.innerHTML = `
-                    <td>${recibo.torre}</td>
-                    <td>${recibo.apartamento}</td>
-                    <td>${recibo.medidor}</td>
-                    <td class="${claseEstado}">${recibo.estado}</td>
-                `;
-                        tbody.appendChild(fila);
-                    });
+                    actualizarFilas(data); // Solo añade las filas nuevas sin borrar las existentes
+                    filtrarTabla(); // Mantiene la búsqueda activa después de actualizar la tabla
                 })
-                .catch(error => console.error("Error cargando datos:", error));
+                .catch(error => console.error("Error al cargar datos:", error));
         }
-
-        document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
-        setInterval(cargarDatosDesdePHP, 10000); // Actualiza cada 10 segundos
 
 
         document.addEventListener("DOMContentLoaded", function () {
