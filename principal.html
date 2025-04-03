@@ -179,16 +179,22 @@
     <div id="form-container" class="hidden">
         <h2>Nuevo medidor</h2>
         <form action="#" method="POST" id="medidorForm">
-            <label for="torre">Torre:</label>
-            <input type="text" id="torre" name="torre" required>
+            <label for="torre"></label>
+            <input type="text" id="torre" name="torre" placeholder="Example...Torre 1,Torre 2,Torre 4"
+                style="font-style: italic;" required>
 
-            <label for="apartamento">Apartamento:</label>
-            <input type="text" id="apartamento" name="apartamento" required>
+            <label for="apartamento"></label>
+            <br>
+            <input type="text" id="apartamento" name="apartamento" placeholder="Apartamento 101,201..."
+                style="font-style: italic;" required>
 
-            <label for="medidor">Medidor:</label>
-            <input type="text" id="medidor" name="medidor" required>
+            <label for="medidor"></label>
+            <br>
+            <input type="text" id="medidor" name="medidor" placeholder="Example 000022527864"
+                style="font-style: italic;" required>
 
-            <label for="estado">Estado:</label>
+            <label for="estado"></label>
+            <br>
             <select id="estado" name="estado" required>
                 <option value="activo">Activo</option>
                 <option value="inactivo">Inactivo</option>
@@ -196,7 +202,7 @@
                 <option value="marval">Marval</option>
             </select>
 
-            <button type="submit">Enviar</button>
+            <button id="btnNewMedidor" type="submit">Enviar</button>
         </form>
     </div>
     <script>
