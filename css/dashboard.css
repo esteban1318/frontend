@@ -144,6 +144,24 @@ body {
         font-size: 14px;
         display: block;
     }
+
+    #form-container {
+        background: rgba(30, 80, 180, 0.7);
+        width: 230px;
+        height: auto;
+        padding: 25px;
+        border-radius: 10px;
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        /* Ejemplo: centrado horizontal */
+        transform: translateX(-50%);
+        /* Centrado preciso */
+        backdrop-filter: blur(60px);
+        -webkit-backdrop-filter: blur(50px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        z-index: 900;
+    }
 }
 
 
@@ -438,6 +456,7 @@ th {
     backdrop-filter: blur(60px);
     -webkit-backdrop-filter: blur(50px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 10);
+    z-index: 900;
 }
 
 
