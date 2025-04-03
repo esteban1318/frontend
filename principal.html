@@ -177,8 +177,8 @@
         <button type="button" class="registerMedidor" id="btnMedidor">Nuevo</button>
     </div>
     <div id="form-container" class="hidden">
-        <h2>Registro de Residencia</h2>
-        <form action="#" method="POST">
+        <h2>Nuevo medidor</h2>
+        <form action="#" method="POST" id="medidorForm">
             <label for="torre">Torre:</label>
             <input type="text" id="torre" name="torre" required>
 
@@ -408,6 +408,45 @@
             formContainer.classList.toggle("hidden"); // Alterna la clase "hidden"
         });
 
+        //agregar dato a mi tabla medidores
+
+        document.getElementById("medidorForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evitar recarga de la página
+
+            // Obtener los valores del formulario
+            let torre = document.getElementById("torre").value.trim();
+            let apartamento = document.getElementById("apartamento").value.trim();
+            let medidor = document.getElementById("medidor").value.trim();
+            let estado = document.getElementById("estado").value;
+
+            // Crear el objeto con los datos
+            let datos = {
+                torre: torre,
+                apartamento: apartamento,
+                medidor: medidor,
+                estado: estado
+            };
+
+            // Enviar la petición al backend
+            fetch("https://mi-backend-production-9444.up.railway.app/api/medidores", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Medidor agregado:", data);
+                    alert("Medidor agregado correctamente");
+                    document.getElementById("medidorForm").reset(); // Limpiar formulario
+                    cargarDatosDesdePHP(); // Actualizar la tabla con los nuevos datos
+                })
+                .catch(error => {
+                    console.error("Error al agregar medidor:", error);
+                    alert("Hubo un error al agregar el medidor.");
+                });
+        });
 
 
     </script>
