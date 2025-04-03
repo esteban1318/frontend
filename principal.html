@@ -369,7 +369,7 @@
             });
         }
         function cargarDatosDesdePHP() {
-            fetch("https://mi-backend-production-9444.up.railway.app/medidores")
+            fetch("https://mi-backend-production-9444.up.railway.app/api/medidores")
                 .then(response => response.json())
                 .then(data => {
                     actualizarFilas(data); // Solo añade las filas nuevas sin borrar las existentes
