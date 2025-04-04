@@ -347,8 +347,8 @@
                 return;
             }
 
-            let idsNuevos = new Set(medidores.map(m => `${m.torre}-${m.apartamento}-${m.medidor}`));
             let filasExistentes = tabla.querySelectorAll("tr");
+            let idsNuevos = new Set(medidores.map(m => `${m.torre}-${m.apartamento}-${m.medidor}`));
 
             // Recorrer y eliminar las filas que ya no están en los datos nuevos
             filasExistentes.forEach(fila => {
@@ -358,14 +358,14 @@
                 let claveUnica = `${torre}-${apartamento}-${medidor}`;
 
                 if (!idsNuevos.has(claveUnica)) {
-                    fila.remove(); // Eliminar fila si ya no está en los datos nuevos
+                    fila.remove();
                 }
             });
 
-            // Actualizar o agregar nuevas filas
+            // Recorrer los datos nuevos para actualizar o agregar filas
             medidores.forEach(medidor => {
                 let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`;
-                let filaExistente = [...filasExistentes].find(fila => {
+                let filaExistente = [...tabla.rows].find(fila => {
                     let t = fila.cells[0]?.innerText.trim();
                     let a = fila.cells[1]?.innerText.trim();
                     let m = fila.cells[2]?.innerText.trim();
@@ -373,7 +373,7 @@
                 });
 
                 if (filaExistente) {
-                    // Si la fila ya existe, actualizar su estado si ha cambiado
+                    // Si la fila ya existe, actualizar solo si el estado cambió
                     let celdaEstado = filaExistente.cells[3];
                     if (celdaEstado.innerText.trim() !== medidor.estado) {
                         celdaEstado.innerText = medidor.estado;
