@@ -347,53 +347,32 @@
                 return;
             }
 
-            let filasExistentes = Array.from(tabla.querySelectorAll("tr"));
-
-            // Convertir filas actuales en un diccionario clave-valor
-            let mapaFilas = new Map();
-            filasExistentes.forEach(fila => {
-                let torre = fila.cells[0]?.innerText.trim();
-                let apartamento = fila.cells[1]?.innerText.trim();
-                let medidor = fila.cells[2]?.innerText.trim();
-                let claveUnica = `${torre}-${apartamento}-${medidor}`;
-                mapaFilas.set(claveUnica, fila);
-            });
-
-            // Ordenar los medidores antes de agregarlos
+            // Convertimos los datos a un array para ordenarlos
             medidores.sort((a, b) => {
+                // Ordenar por torre (alfabéticamente)
                 if (a.torre !== b.torre) {
                     return a.torre.localeCompare(b.torre);
                 }
+                // Ordenar por apartamento (como número, no como texto)
                 return parseInt(a.apartamento) - parseInt(b.apartamento);
             });
 
-            // Nueva tabla ordenada
-            let nuevaTabla = document.createElement("tbody");
+            // Crear nuevo tbody ordenado
+            let nuevoTbody = document.createElement("tbody");
 
             medidores.forEach(medidor => {
-                let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`;
-                let fila;
-
-                if (mapaFilas.has(claveUnica)) {
-                    // Si la fila ya existe, la reutilizamos
-                    fila = mapaFilas.get(claveUnica);
-                    mapaFilas.delete(claveUnica); // La sacamos del mapa porque ya está usada
-                } else {
-                    // Crear una nueva fila si no existe
-                    fila = document.createElement("tr");
-                    fila.innerHTML = `
-                <td>${medidor.torre}</td>
-                <td>${medidor.apartamento}</td>
-                <td>${medidor.medidor}</td>
-                <td class="${medidor.estado.trim() === "Entregado" ? "estado-entregado" : ""}">${medidor.estado}</td>
-            `;
-                }
-
-                nuevaTabla.appendChild(fila);
+                let fila = document.createElement("tr");
+                fila.innerHTML = `
+            <td>${medidor.torre}</td>
+            <td>${medidor.apartamento}</td>
+            <td>${medidor.medidor}</td>
+            <td class="${medidor.estado.trim() === "Entregado" ? "estado-entregado" : ""}">${medidor.estado}</td>
+        `;
+                nuevoTbody.appendChild(fila);
             });
 
-            // Reemplazar el tbody con el nuevo contenido ordenado
-            tabla.parentNode.replaceChild(nuevaTabla, tabla);
+            // Reemplazar tbody con el nuevo ordenado
+            tabla.parentNode.replaceChild(nuevoTbody, tabla);
         }
 
         function cargarDatosDesdePHP() {
