@@ -347,50 +347,53 @@
                 return;
             }
 
-            let filasExistentes = tabla.querySelectorAll("tr");
-            let idsNuevos = new Set(medidores.map(m => `${m.torre}-${m.apartamento}-${m.medidor}`));
+            let filasExistentes = Array.from(tabla.querySelectorAll("tr"));
 
-            // Recorrer y eliminar las filas que ya no están en los datos nuevos
+            // Convertir filas actuales en un diccionario clave-valor
+            let mapaFilas = new Map();
             filasExistentes.forEach(fila => {
                 let torre = fila.cells[0]?.innerText.trim();
                 let apartamento = fila.cells[1]?.innerText.trim();
                 let medidor = fila.cells[2]?.innerText.trim();
                 let claveUnica = `${torre}-${apartamento}-${medidor}`;
-
-                if (!idsNuevos.has(claveUnica)) {
-                    fila.remove();
-                }
+                mapaFilas.set(claveUnica, fila);
             });
 
-            // Recorrer los datos nuevos para actualizar o agregar filas
+            // Ordenar los medidores antes de agregarlos
+            medidores.sort((a, b) => {
+                if (a.torre !== b.torre) {
+                    return a.torre.localeCompare(b.torre);
+                }
+                return parseInt(a.apartamento) - parseInt(b.apartamento);
+            });
+
+            // Nueva tabla ordenada
+            let nuevaTabla = document.createElement("tbody");
+
             medidores.forEach(medidor => {
                 let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`;
-                let filaExistente = [...tabla.rows].find(fila => {
-                    let t = fila.cells[0]?.innerText.trim();
-                    let a = fila.cells[1]?.innerText.trim();
-                    let m = fila.cells[2]?.innerText.trim();
-                    return `${t}-${a}-${m}` === claveUnica;
-                });
+                let fila;
 
-                if (filaExistente) {
-                    // Si la fila ya existe, actualizar solo si el estado cambió
-                    let celdaEstado = filaExistente.cells[3];
-                    if (celdaEstado.innerText.trim() !== medidor.estado) {
-                        celdaEstado.innerText = medidor.estado;
-                        celdaEstado.className = medidor.estado.trim() === "Entregado" ? "estado-entregado" : "";
-                    }
+                if (mapaFilas.has(claveUnica)) {
+                    // Si la fila ya existe, la reutilizamos
+                    fila = mapaFilas.get(claveUnica);
+                    mapaFilas.delete(claveUnica); // La sacamos del mapa porque ya está usada
                 } else {
-                    // Si no existe, agregar una nueva fila
-                    let fila = document.createElement("tr");
+                    // Crear una nueva fila si no existe
+                    fila = document.createElement("tr");
                     fila.innerHTML = `
                 <td>${medidor.torre}</td>
                 <td>${medidor.apartamento}</td>
                 <td>${medidor.medidor}</td>
                 <td class="${medidor.estado.trim() === "Entregado" ? "estado-entregado" : ""}">${medidor.estado}</td>
             `;
-                    tabla.appendChild(fila);
                 }
+
+                nuevaTabla.appendChild(fila);
             });
+
+            // Reemplazar el tbody con el nuevo contenido ordenado
+            tabla.parentNode.replaceChild(nuevaTabla, tabla);
         }
 
         function cargarDatosDesdePHP() {
