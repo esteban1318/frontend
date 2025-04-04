@@ -223,6 +223,12 @@
                         mostrar = true;
                         break;
                     }
+                    // Aplicar clase "estado-entregado" si el texto es "Entregado"
+                    if (textoCelda.trim() === "Entregado") {
+                        celdas[j].classList.add("estado-entregado");
+                    } else {
+                        celdas[j].classList.remove("estado-entregado");
+                    }
                 }
 
                 filas[i].style.display = mostrar ? "" : "none";
