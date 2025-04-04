@@ -287,7 +287,7 @@
         });
 
         document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
-        setInterval(actualizarTablaConFiltro, 10000); // Actualiza cada 10 segundos
+        setInterval(actualizarTablaConFiltro, 5000); // Actualiza cada 10 segundos
 
         function actualizarTablaConFiltro() {
             let filtroActual = (document.getElementById("busqueda").value ||
@@ -340,29 +340,47 @@
         }
         const API_URL = "https://mi-backend-production-9444.up.railway.app";
 
-
         function actualizarFilas(medidores) {
-            let tabla = document.querySelector("#miTabla2 tbody"); // Asegúrate del ID correcto
+            let tabla = document.querySelector("#miTabla2 tbody");
             if (!tabla) {
                 console.error("Error: No se encontró la tabla en el DOM.");
                 return;
             }
 
-            let idsExistentes = new Set();
+            let idsNuevos = new Set(medidores.map(m => `${m.torre}-${m.apartamento}-${m.medidor}`));
             let filasExistentes = tabla.querySelectorAll("tr");
 
+            // Recorrer y eliminar las filas que ya no están en los datos nuevos
             filasExistentes.forEach(fila => {
                 let torre = fila.cells[0]?.innerText.trim();
                 let apartamento = fila.cells[1]?.innerText.trim();
                 let medidor = fila.cells[2]?.innerText.trim();
-                let claveUnica = `${torre}-${apartamento}-${medidor}`; // Se usa como identificador único
-                if (torre && apartamento && medidor) idsExistentes.add(claveUnica);
+                let claveUnica = `${torre}-${apartamento}-${medidor}`;
+
+                if (!idsNuevos.has(claveUnica)) {
+                    fila.remove(); // Eliminar fila si ya no está en los datos nuevos
+                }
             });
 
+            // Actualizar o agregar nuevas filas
             medidores.forEach(medidor => {
-                let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`; // Genero la clave del nuevo dato
+                let claveUnica = `${medidor.torre}-${medidor.apartamento}-${medidor.medidor}`;
+                let filaExistente = [...filasExistentes].find(fila => {
+                    let t = fila.cells[0]?.innerText.trim();
+                    let a = fila.cells[1]?.innerText.trim();
+                    let m = fila.cells[2]?.innerText.trim();
+                    return `${t}-${a}-${m}` === claveUnica;
+                });
 
-                if (!idsExistentes.has(claveUnica)) { // Si no está en la tabla, se agrega
+                if (filaExistente) {
+                    // Si la fila ya existe, actualizar su estado si ha cambiado
+                    let celdaEstado = filaExistente.cells[3];
+                    if (celdaEstado.innerText.trim() !== medidor.estado) {
+                        celdaEstado.innerText = medidor.estado;
+                        celdaEstado.className = medidor.estado.trim() === "Entregado" ? "estado-entregado" : "";
+                    }
+                } else {
+                    // Si no existe, agregar una nueva fila
                     let fila = document.createElement("tr");
                     fila.innerHTML = `
                 <td>${medidor.torre}</td>
@@ -374,6 +392,7 @@
                 }
             });
         }
+
         function cargarDatosDesdePHP() {
             fetch("https://mi-backend-production-9444.up.railway.app/api/medidores")
                 .then(response => response.json())
