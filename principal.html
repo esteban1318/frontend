@@ -580,7 +580,7 @@
             const fila = document.createElement("tr");
 
             // Aplicar clase si el estado es 'Entregado'
-            if (dato.estado.toLowerCase() === "Entregado") {
+            if (dato.estado.trim().toLowerCase() === "entregado") {
                 fila.classList.add("fila-entregado");
             }
 
