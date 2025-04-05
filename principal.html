@@ -442,39 +442,114 @@
         const API_URL = "https://mi-backend-production-9444.up.railway.app";
 
         function actualizarFilas(medidores) {
-            let tabla = document.querySelector("#miTabla2 tbody");
+            const tabla = document.querySelector("#miTabla2 tbody");
             if (!tabla) {
                 console.error("Error: No se encontró la tabla en el DOM.");
                 return;
             }
 
-            // Convertimos los datos a un array para ordenarlos
+            const clavesNuevas = new Set();
+            const datosPorClave = {};
+
             medidores.sort((a, b) => {
-                // Ordenar por torre (alfabéticamente)
                 if (a.torre !== b.torre) {
                     return a.torre.localeCompare(b.torre);
                 }
-                // Ordenar por apartamento (como número, no como texto)
-                return parseInt(a.apartamento) - parseInt(b.apartamento);
+                return a.apartamento.localeCompare(b.apartamento);
             });
 
-            // Crear nuevo tbody ordenado
-            let nuevoTbody = document.createElement("tbody");
-
+            // Mapear medidores nuevos
             medidores.forEach(medidor => {
-                let fila = document.createElement("tr");
-                fila.innerHTML = `
-            <td>${medidor.torre}</td>
-            <td>${medidor.apartamento}</td>
-            <td>${medidor.medidor}</td>
-            <td class="${medidor.estado.trim() === "Entregado" ? "estado-entregado" : ""}">${medidor.estado}</td>
-        `;
-                nuevoTbody.appendChild(fila);
+                const clave = `${medidor.torre}-${medidor.apartamento}`;
+                clavesNuevas.add(clave);
+                datosPorClave[clave] = medidor;
             });
 
-            // Reemplazar tbody con el nuevo ordenado
-            tabla.parentNode.replaceChild(nuevoTbody, tabla);
+            const filasActuales = Array.from(tabla.rows);
+            const clavesActuales = new Set();
+
+            // Actualizar o eliminar filas existentes
+            filasActuales.forEach(fila => {
+                const torre = fila.cells[0]?.textContent.trim();
+                const apto = fila.cells[1]?.textContent.trim();
+                const clave = `${torre}-${apto}`;
+
+                clavesActuales.add(clave);
+
+                if (!clavesNuevas.has(clave)) {
+                    tabla.removeChild(fila);
+                } else {
+                    const medidorNuevo = datosPorClave[clave];
+                    const estadoNormalizado = medidorNuevo.estado.trim().toLowerCase();
+
+                    const contenidoActual = [
+                        fila.cells[0].textContent.trim(),
+                        fila.cells[1].textContent.trim(),
+                        fila.cells[2].textContent.trim(),
+                        fila.cells[3].textContent.trim()
+                    ];
+
+                    const contenidoNuevo = [
+                        medidorNuevo.torre,
+                        medidorNuevo.apartamento,
+                        medidorNuevo.medidor,
+                        medidorNuevo.estado
+                    ];
+
+                    if (JSON.stringify(contenidoActual) !== JSON.stringify(contenidoNuevo)) {
+                        fila.cells[2].textContent = medidorNuevo.medidor;
+                        fila.cells[3].textContent = medidorNuevo.estado;
+
+                        if (estadoNormalizado === "entregado") {
+                            fila.classList.add("fila-entregado");
+                        } else {
+                            fila.classList.remove("fila-entregado");
+                        }
+                    }
+                }
+            });
+
+            // Agregar filas nuevas manteniendo el orden
+            clavesNuevas.forEach(clave => {
+                if (!clavesActuales.has(clave)) {
+                    const medidor = datosPorClave[clave];
+                    const fila = document.createElement("tr");
+
+                    const estadoNormalizado = medidor.estado.trim().toLowerCase();
+                    if (estadoNormalizado === "entregado") {
+                        fila.classList.add("fila-entregado");
+                    }
+
+                    fila.innerHTML = `
+                <td>${medidor.torre}</td>
+                <td>${medidor.apartamento}</td>
+                <td>${medidor.medidor}</td>
+                <td>${medidor.estado}</td>
+            `;
+
+                    const filas = Array.from(tabla.rows);
+                    let insertado = false;
+
+                    for (let i = 0; i < filas.length; i++) {
+                        const filaExistente = filas[i];
+                        const torreExistente = filaExistente.cells[0]?.textContent.trim();
+                        const aptoExistente = filaExistente.cells[1]?.textContent.trim();
+
+                        const comp = medidor.torre.localeCompare(torreExistente);
+                        if (comp < 0 || (comp === 0 && medidor.apartamento.localeCompare(aptoExistente) < 0)) {
+                            tabla.insertBefore(fila, filaExistente);
+                            insertado = true;
+                            break;
+                        }
+                    }
+
+                    if (!insertado) {
+                        tabla.appendChild(fila);
+                    }
+                }
+            });
         }
+
 
         function cargarDatosDesdePHP() {
             fetch("https://mi-backend-production-9444.up.railway.app/api/medidores")
