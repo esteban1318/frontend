@@ -145,34 +145,113 @@
         </div>
     </div>
     <div class="content-container hidden" id="contenedor-registros">
-        <h1 id="tituloContainerRegister">Nuevo propietario</h1>
+        <h2>Registro de Propietario</h2>
+        <form class="form-propietario">
+            <!-- Primera columna -->
+            <div class="form-column">
+                <h3>Información General</h3>
 
-        <!-- Fecha de entrega -->
-        <div class="containerFecha">
-            <label for="inputFecha">Fecha de entrega</label>
-            <input type="text" id="inputFecha" />
-        </div>
+                <label for="fechaEntrega">Fecha de Entrega</label>
+                <input type="date" id="fechaEntrega" required>
 
-        <!-- Datos del Apartamento -->
-        <div class="containerApartamento">
-            <div>
-                <label for="inputTorre">Torre:</label>
-                <input type="number" id="inputTorre" />
+                <label for="torre">Torre</label>
+                <input type="text" id="torre" required>
+
+                <label for="inmueble">Inmueble</label>
+                <input type="text" id="inmueble" required>
+
+                <label for="parqueadero">Parqueadero</label>
+                <input type="text" id="parqueadero" required>
+
+                <h3>Propietario</h3>
+
+                <label for="nombrePropietario">Nombre y Apellidos</label>
+                <input type="text" id="nombrePropietario" required>
+
+                <label for="cedulaPropietario">Cédula</label>
+                <input type="number" id="cedulaPropietario" required>
+
+                <label for="edadPropietario">Edad</label>
+                <input type="number" id="edadPropietario" required>
+
+                <label for="emailPropietario">Email</label>
+                <input type="email" id="emailPropietario" required>
+
+                <label for="telefonoPropietario">Teléfono</label>
+                <input type="text" id="telefonoPropietario" required>
             </div>
-            <div>
-                <label for="inputInmueble">Inmueble:</label>
-                <input type="number" id="inputInmueble" />
+
+            <!-- Segunda columna -->
+            <div class="form-column2">
+                <h3>Información Adicional</h3>
+
+                <label for="segundoProp">¿Hay un segundo propietario?</label>
+                <select id="segundoProp" onchange="mostrarSegundoPropietario()">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <div id="segundoPropietario" class="hidden">
+                    <h3>Segundo Propietario</h3>
+                    <label for="nombreSegundoProp">Nombre y Apellidos</label>
+                    <input type="text" id="nombreSegundoProp">
+                    <label for="cedulaSegundoProp">Cédula</label>
+                    <input type="number" id="cedulaSegundoProp">
+                </div>
+
+                <label for="vehiculo">¿Tiene vehículo?</label>
+                <select id="vehiculo" onchange="mostrarVehiculo()">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <div id="vehiculoInfo" class="hidden">
+                    <label for="modeloVehiculo">Modelo</label>
+                    <input type="text" id="modeloVehiculo">
+                    <label for="placaVehiculo">Placa</label>
+                    <input type="text" id="placaVehiculo">
+                </div>
+
+                <label for="moto">¿Tiene moto?</label>
+                <select id="moto" onchange="mostrarMoto()">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <div id="motoInfo" class="hidden">
+                    <label for="marcaMoto">Marca</label>
+                    <input type="text" id="marcaMoto">
+                    <label for="modeloMoto">Modelo</label>
+                    <input type="text" id="modeloMoto">
+                    <label for="placaMoto">Placa</label>
+                    <input type="text" id="placaMoto">
+                </div>
+
+                <label for="bicicleta">¿Tiene bicicleta?</label>
+                <select id="bicicleta">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <label for="cantidadBicicletas">Cantidad</label>
+                <input type="number" id="cantidadBicicletas">
+
+                <label for="mascota">¿Tiene mascotas?</label>
+                <select id="mascota" onchange="mostrarMascota()">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+
+                <div id="mascotaInfo" class="hidden">
+                    <label for="razaMascota">Raza</label>
+                    <input type="text" id="razaMascota">
+                </div>
             </div>
-        </div>
+        </form>
 
-        <!-- Nombre del Propietario -->
-        <div class="containerNombre">
-            <label for="inputNombre">Nombre completo</label>
-            <input type="text" id="inputNombre">
-        </div>
-
-        <button class="btnRegister">Registrar</button>
+        <button type="submit" class="btn" id="btnEnviarRegistro">Enviar</button>
     </div>
+
     <div>
         <button type="button" class="registerMedidor" id="btnMedidor">Nuevo</button>
     </div>
@@ -242,10 +321,12 @@
 
             const tablaResidentes = document.getElementById("tabla-residentes");
             const tablaRecibos = document.getElementById("tabla-recibos");
-            const contenedorRegistros = document.getElementById("contenedor-registros");
+            const contenedorRegistros = document.getElementById("contenedor-registros"); // Ocultar por defecto
+            const btnMedidor = document.getElementById("btnMedidor");
+            btnMedidor.style.display = "block"; // Ocultar botón por defecto
 
-            const textHeader = document.getElementById("textHeader"); // Título principal del Dashboard
-            const statsContainer = document.getElementById("statusContainer"); // Tarjetas de estadísticas
+            const textHeader = document.getElementById("textHeader");
+            const statsContainer = document.getElementById("statusContainer");
 
             function mostrarSeccion(seccionMostrada) {
                 // Ocultar todas las secciones
@@ -256,13 +337,23 @@
                 // Mostrar solo la sección correspondiente
                 seccionMostrada.classList.remove("hidden");
 
+                // Mostrar u ocultar el botón según la sección activa
+                if (btnMedidor) {
+                    if (seccionMostrada === tablaResidentes || seccionMostrada === tablaRecibos) {
+                        btnMedidor.style.display = "block"; // Mostrar botón
+                    } else {
+                        btnMedidor.style.display = "none"; // Ocultar botón
+                    }
+                }
+
                 // Configurar visibilidad del encabezado y estadísticas
                 if (seccionMostrada === contenedorRegistros) {
-                    textHeader.style.display = "none"; // Ocultar el título
-                    statsContainer.style.display = "none"; // Ocultar estadísticas
+                    textHeader.style.display = "none";
+                    statsContainer.style.display = "none";
+
                 } else {
-                    textHeader.style.display = "block"; // Mostrar título
-                    statsContainer.style.display = "flex"; // Mostrar estadísticas
+                    textHeader.style.display = "block";
+                    statsContainer.style.display = "flex";
                 }
             }
 
@@ -274,6 +365,8 @@
                 tablaResidentes.classList.add("hidden");
                 tablaRecibos.classList.add("hidden");
                 contenedorRegistros.classList.add("hidden");
+
+                if (btnMedidor) btnMedidor.style.display = "none"; // Ocultar botón en inicio
             });
 
             menuResidentes.addEventListener("click", function (event) {
@@ -291,6 +384,8 @@
                 mostrarSeccion(contenedorRegistros);
             });
         });
+
+
 
         document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
         setInterval(actualizarTablaConFiltro, 5000); // Actualiza cada 10 segundos
@@ -459,6 +554,24 @@
                     console.error("Error al agregar medidor:", error);
                     alert("Hubo un error al agregar el medidor.");
                 });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            function toggleVisibility(selectId, targetId) {
+                const selectElement = document.getElementById(selectId);
+                const targetElement = document.getElementById(targetId);
+
+                if (selectElement && targetElement) {
+                    selectElement.addEventListener("change", function () {
+                        targetElement.classList.toggle("hidden", selectElement.value === "no");
+                    });
+                }
+            }
+
+            // Aplicar a cada select con funcionalidad de mostrar/ocultar
+            toggleVisibility("segundoProp", "segundoPropietario");
+            toggleVisibility("vehiculo", "vehiculoInfo");
+            toggleVisibility("moto", "motoInfo");
+            toggleVisibility("mascota", "mascotaInfo");
         });
 
 

@@ -85,6 +85,7 @@ body {
     }
 
     .sidebar {
+        position: fixed;
         width: 80%;
         height: 100vh;
         position: fixed;
@@ -182,6 +183,7 @@ body {
     color: white;
     padding: 20px;
     height: 100vh;
+
 }
 
 #logo {
@@ -269,6 +271,7 @@ li:hover {
 .stats-container {
     display: flex;
     gap: 20px;
+
 }
 
 .stat-card {
@@ -289,6 +292,8 @@ li:hover {
     border-collapse: collapse;
     margin-top: 10px;
     overflow-y: auto;
+
+
 }
 
 th {
@@ -354,16 +359,20 @@ th {
     border-spacing: 0;
 }
 
-#contenedor-registros {
-    position: relative;
-    margin-top: 20px;
-    margin-right: 450px;
-    background-color: #006064;
-    width: 300vh;
-    border-radius: 13px;
-    height: 90vh;
-    text-align: center;
-    padding: 10px;
+#btnMedidor {
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 900 !important;
+
+}
+
+
+#contenedor-registros label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
 }
 
 #tituloContainerRegister {
@@ -432,19 +441,6 @@ th {
     font-weight: bold;
 }
 
-#btnMedidor {
-    position: absolute;
-    top: 38rem;
-    right: 10%;
-    font-style: bold;
-    color: black;
-    border-radius: 6px;
-    border: solid 1.5px RGB(98, 33, 209);
-    cursor: pointer;
-
-
-}
-
 .hidden {
     display: none;
     /* Oculta el formulario */
@@ -466,10 +462,7 @@ th {
     z-index: 900;
 }
 
-
-
-
-label,
+.labelNewPro,
 select,
 input {
     display: block;
@@ -482,4 +475,131 @@ select {
     padding: 8px;
     border: none;
     border-radius: 5px;
+}
+
+#contenedor-registros {
+    background: #333366;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 300px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-width: 600px;
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(50px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 900;
+    font-size: 14px;
+    gap: 10px;
+    color: black;
+    font-style: normal;
+    font-family: Arial, sans-serif;
+}
+
+.form-propietario {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.form-column2 {
+    width: 48%;
+    padding: 20px;
+    border-radius: 8px;
+
+}
+
+* Estilos generales para los inputs y selects */ input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para los labels */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 8px;
+}
+
+/* Estilo para el botón */
+#btnEnviarRegistro {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 20px auto;
+    cursor: pointer;
+    max-width: 300px;
+}
+
+#btnEnviarRegistro:hover {
+    background-color: #0056b3;
+
+}
+
+/* Ocultar las secciones dinámicas por defecto */
+.hidden {
+    display: none;
+}
+
+/* Estilos específicos para cada ID */
+#fechaEntrega,
+#torre,
+#inmueble,
+#parqueadero,
+#nombrePropietario,
+#cedulaPropietario,
+#edadPropietario,
+#emailPropietario,
+#telefonoPropietario,
+#nombreSegundoProp,
+#cedulaSegundoProp,
+#modeloVehiculo,
+#placaVehiculo,
+#marcaMoto,
+#modeloMoto,
+#placaMoto,
+#cantidadBicicletas,
+#razaMascota {
+    background: wheat;
+    width: 240px;
+    gap: 10px;
+}
+
+/* Estilos para los selectores */
+#segundoProp,
+#vehiculo,
+#moto,
+#bicicleta,
+#mascota {
+    background: wheat;
+    cursor: pointer;
+}
+
+/* Estilo cuando el input está enfocado */
+input:focus,
+select:focus {
+    outline: none;
+    border: 2px solid #007bff;
+}
+
+/* Efecto hover en inputs */
+input:hover,
+select:hover {
+    border-color: #0056b3;
 }
