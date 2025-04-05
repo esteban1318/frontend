@@ -650,3 +650,8 @@ select:hover {
     text-align: center;
 
 }
+
+.fila-entregado {
+    background-color: #d4edda;
+    /* Verde claro */
+}

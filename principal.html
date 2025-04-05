@@ -574,6 +574,23 @@
             toggleVisibility("mascota", "mascotaInfo");
         });
 
+        const tbody = document.querySelector("#miTabla2 tbody");
+
+        datos.forEach(dato => {
+            const fila = document.createElement("tr");
+
+            // Aplicar clase si el estado es 'Entregado'
+            if (dato.estado.toLowerCase() === "Entregado") {
+                fila.classList.add("fila-entregado");
+            }
+
+            fila.innerHTML = `
+    <td>${dato.nombre}</td>
+    <td>${dato.estado}</td>
+  `;
+
+            tbody.appendChild(fila);
+        });
 
     </script>
     <script src="/js/login.js"></script>
