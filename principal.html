@@ -579,15 +579,19 @@
         datos.forEach(dato => {
             const fila = document.createElement("tr");
 
-            // Aplicar clase si el estado es 'Entregado'
-            if (dato.estado.trim().toLowerCase() === "entregado") {
+            // Normaliza el valor del estado
+            const estadoNormalizado = dato.estado.trim().toLowerCase();
+
+            if (estadoNormalizado === "entregado") {
                 fila.classList.add("fila-entregado");
             }
 
             fila.innerHTML = `
-    <td>${dato.nombre}</td>
-    <td>${dato.estado}</td>
-  `;
+        <td>${dato.torre}</td>
+        <td>${dato.apartamento}</td>
+        <td>${dato.medidor}</td>
+        <td>${dato.estado}</td>
+    `;
 
             tbody.appendChild(fila);
         });
