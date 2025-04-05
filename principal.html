@@ -145,7 +145,7 @@
         </div>
     </div>
     <div class="content-container hidden" id="contenedor-registros">
-        <h2>Registro de Propietario</h2>
+        <h2 id="textNuevoPropietario">Registro de Propietario</h2>
         <form class="form-propietario">
             <!-- Primera columna -->
             <div class="form-column">
@@ -259,17 +259,17 @@
         <h2>Nuevo medidor</h2>
         <form action="#" method="POST" id="medidorForm">
             <label for="torre"></label>
-            <input type="text" id="torre" name="torre" placeholder="Example...Torre 1,Torre 2,Torre 4"
-                style="font-style: italic;" required>
+            <input class="inputMedidor" type="text" id="torreMedidor" name="torre"
+                placeholder="Example...Torre 1,Torre 2,Torre 4" style="font-style: italic;" required>
 
             <label for="apartamento"></label>
             <br>
-            <input type="text" id="apartamento" name="apartamento" placeholder="Apartamento 101,201..."
-                style="font-style: italic;" required>
+            <input class="inputMedidor" type="text" id="apartamento" name="apartamento"
+                placeholder="Apartamento 101,201..." style="font-style: italic;" required>
 
             <label for="medidor"></label>
             <br>
-            <input type="text" id="medidor" name="medidor" placeholder="Example 000022527864"
+            <input class="inputMedidor" type="text" id="medidor" name="medidor" placeholder="Example 000022527864"
                 style="font-style: italic;" required>
 
             <label for="estado"></label>

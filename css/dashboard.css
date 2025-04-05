@@ -347,6 +347,13 @@ th {
     border: 1px solid #ddd;
 }
 
+.inputMedidor {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 90%;
+}
+
 .contenedorTabla thead {
     position: sticky;
     top: 0;
@@ -463,18 +470,36 @@ th {
 }
 
 .labelNewPro,
-select,
-input {
+select {
     display: block;
     width: 95%;
     margin-bottom: 10px;
 }
 
-input,
+#fechaEntrega,
+#torre,
+#inmueble,
+#parqueadero,
+#nombrePropietario,
+#cedulaPropietario,
+#edadPropietario,
+#emailPropietario,
+#telefonoPropietario,
+#nombreSegundoProp,
+#cedulaSegundoProp,
+#modeloVehiculo,
+#placaVehiculo,
+#marcaMoto,
+#modeloMoto,
+#placaMoto,
+#cantidadBicicletas,
+#razaMascota,
 select {
     padding: 8px;
     border: none;
     border-radius: 5px;
+    width: 90%;
+
 }
 
 #contenedor-registros {
@@ -485,7 +510,7 @@ select {
     top: 300px;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 100%;
     max-height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
@@ -504,7 +529,7 @@ select {
 .form-propietario {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
     max-width: 900px;
     margin: auto;
 }
@@ -517,9 +542,26 @@ select {
 }
 
 * Estilos generales para los inputs y selects */ input,
-select {
-    width: 100%;
-    padding: 8px;
+select,
+#fechaEntrega,
+#torre,
+#inmueble,
+#parqueadero,
+#nombrePropietario,
+#cedulaPropietario,
+#edadPropietario,
+#emailPropietario,
+#telefonoPropietario,
+#nombreSegundoProp,
+#cedulaSegundoProp,
+#modeloVehiculo,
+#placaVehiculo,
+#marcaMoto,
+#modeloMoto,
+#placaMoto,
+#cantidadBicicletas,
+#razaMascota {
+    width: 90%;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -530,7 +572,7 @@ label {
     display: block;
     font-weight: bold;
     margin-top: 10px;
-    padding: 8px;
+    padding: 2px;
 }
 
 /* Estilo para el botón */
@@ -576,9 +618,9 @@ label {
 #placaMoto,
 #cantidadBicicletas,
 #razaMascota {
-    background: wheat;
-    width: 240px;
-    gap: 10px;
+    background: white;
+    width: 250px;
+    padding: auto;
 }
 
 /* Estilos para los selectores */
@@ -587,7 +629,7 @@ label {
 #moto,
 #bicicleta,
 #mascota {
-    background: wheat;
+    background: white;
     cursor: pointer;
 }
 
@@ -602,4 +644,9 @@ select:focus {
 input:hover,
 select:hover {
     border-color: #0056b3;
+}
+
+#textNuevoPropietario {
+    text-align: center;
+
 }
