@@ -498,7 +498,7 @@
 
                     if (JSON.stringify(contenidoActual) !== JSON.stringify(contenidoNuevo)) {
                         fila.cells[2].textContent = medidorNuevo.medidor;
-                        fila.cells[3].textContent = medidorNuevo.estado;
+                        fila.cells[3].innerHTML = `<span class="estado-${estadoNormalizado}">${medidorNuevo.estado}</span>`;
 
                         if (estadoNormalizado === "entregado") {
                             fila.classList.add("fila-entregado");
