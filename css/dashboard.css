@@ -146,28 +146,51 @@ body {
         display: block;
     }
 
-    #form-container {
-        background: rgba(30, 80, 180, 0.7);
-        width: 230px;
-        height: auto;
-        padding: 25px;
-        border-radius: 10px;
-        position: absolute;
-        top: 15px;
-        left: 50%;
-        /* Ejemplo: centrado horizontal */
-        transform: translateX(-50%);
-        /* Centrado preciso */
-        backdrop-filter: blur(60px);
-        -webkit-backdrop-filter: blur(50px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        z-index: 900;
+    #contenedor-registros {
+        width: 85%;
+        /* ancho deseado */
+        max-width: 300px;
+        /* si quieres que no pase de cierto tamaño */
+        margin: 240px auto 0 auto;
+        padding: 15px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-propietario {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-column2 {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #btnEnviarRegistro {
+        width: 80%;
     }
 
     #btnNewMedidor {
         border-radius: 3px;
 
     }
+
+    #form-container {
+        position: absolute;
+        margin-top: 200px;
+        /* antes era 20px */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        max-width: 400px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
 
 }
 
@@ -461,8 +484,8 @@ th {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     width: 230px;
     position: absolute;
-    top: 25%;
-    right: 30%;
+    top: 200px;
+    right: 30px;
     backdrop-filter: blur(60px);
     -webkit-backdrop-filter: blur(50px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 10);
@@ -503,7 +526,7 @@ select {
 }
 
 #contenedor-registros {
-    background: #333366;
+    background: rgb(223, 223, 223);
     padding: 20px;
     border-radius: 10px;
     position: absolute;
@@ -563,8 +586,6 @@ select,
 #razaMascota {
     width: 90%;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 /* Estilo para los labels */
@@ -621,6 +642,8 @@ label {
     background: white;
     width: 250px;
     padding: auto;
+    border-radius: 5px;
+    border: 1px solid gray;
 }
 
 /* Estilos para los selectores */

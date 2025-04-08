@@ -313,6 +313,7 @@
                 filas[i].style.display = mostrar ? "" : "none";
             }
         }
+
         document.addEventListener("DOMContentLoaded", function () {
             const menuInicio = document.querySelector(".sidebar-nav li:nth-child(1) a");
             const menuResidentes = document.querySelector(".sidebar-nav li:nth-child(2) a");
@@ -321,12 +322,29 @@
 
             const tablaResidentes = document.getElementById("tabla-residentes");
             const tablaRecibos = document.getElementById("tabla-recibos");
-            const contenedorRegistros = document.getElementById("contenedor-registros"); // Ocultar por defecto
+            const contenedorRegistros = document.getElementById("contenedor-registros");
             const btnMedidor = document.getElementById("btnMedidor");
-            btnMedidor.style.display = "block"; // Ocultar botón por defecto
+            const inputBusqueda = document.getElementById("inputBusqueda");
+            const searchContainer = document.querySelector(".mobile-search-container"); // 🔍 contenedor del input
 
             const textHeader = document.getElementById("textHeader");
             const statsContainer = document.getElementById("statusContainer");
+
+            function esVistaMovil() {
+                return window.innerWidth <= 768;
+            }
+
+            function ocultarBusquedaSiMovil(seccionMostrada) {
+                if (esVistaMovil()) {
+                    if (seccionMostrada === contenedorRegistros || seccionMostrada === null) {
+                        if (searchContainer) searchContainer.classList.add("hidden");
+                    } else {
+                        if (searchContainer) searchContainer.classList.remove("hidden");
+                    }
+                } else {
+                    if (searchContainer) searchContainer.classList.remove("hidden");
+                }
+            }
 
             function mostrarSeccion(seccionMostrada) {
                 // Ocultar todas las secciones
@@ -340,48 +358,61 @@
                 // Mostrar u ocultar el botón según la sección activa
                 if (btnMedidor) {
                     if (seccionMostrada === tablaResidentes || seccionMostrada === tablaRecibos) {
-                        btnMedidor.style.display = "block"; // Mostrar botón
+                        btnMedidor.style.display = "block";
                     } else {
-                        btnMedidor.style.display = "none"; // Ocultar botón
+                        btnMedidor.style.display = "none";
                     }
                 }
 
-                // Configurar visibilidad del encabezado y estadísticas
+                // Mostrar u ocultar encabezado y stats
                 if (seccionMostrada === contenedorRegistros) {
                     textHeader.style.display = "none";
                     statsContainer.style.display = "none";
-
                 } else {
                     textHeader.style.display = "block";
                     statsContainer.style.display = "flex";
                 }
+
+                // Ocultar o mostrar búsqueda si es móvil
+                ocultarBusquedaSiMovil(seccionMostrada);
             }
 
-            // Eventos de los botones del menú
+            // INICIO
             menuInicio.addEventListener("click", function (event) {
                 event.preventDefault();
-                textHeader.style.display = "block";
-                statsContainer.style.display = "flex";
                 tablaResidentes.classList.add("hidden");
                 tablaRecibos.classList.add("hidden");
                 contenedorRegistros.classList.add("hidden");
+                textHeader.style.display = "block";
+                statsContainer.style.display = "flex";
 
-                if (btnMedidor) btnMedidor.style.display = "none"; // Ocultar botón en inicio
+                if (btnMedidor) btnMedidor.style.display = "none";
+
+                ocultarBusquedaSiMovil(null); // inicio no tiene sección activa
             });
 
+            // RESIDENTES
             menuResidentes.addEventListener("click", function (event) {
                 event.preventDefault();
                 mostrarSeccion(tablaResidentes);
             });
 
+            // RECIBOS
             menuRecibos.addEventListener("click", function (event) {
                 event.preventDefault();
                 mostrarSeccion(tablaRecibos);
             });
 
+            // REGISTROS
             menuRegistros.addEventListener("click", function (event) {
                 event.preventDefault();
                 mostrarSeccion(contenedorRegistros);
+            });
+
+            // Detectar cambio de tamaño de ventana
+            window.addEventListener("resize", () => {
+                const activeSection = document.querySelector(".content-container:not(.hidden)");
+                ocultarBusquedaSiMovil(activeSection);
             });
         });
 
