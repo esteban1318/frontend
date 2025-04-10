@@ -147,17 +147,22 @@ body {
     }
 
     #contenedor-registros {
-        width: 85%;
-        /* ancho deseado */
-        max-width: 300px;
-        /* si quieres que no pase de cierto tamaño */
-        margin: 240px auto 0 auto;
-        padding: 15px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        margin-top: 20px;
+        left: auto;
+        transform: none;
+        width: 90%;
+        max-width: none;
+        margin: 20px auto;
+        padding: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        background: rgb(223, 223, 223);
+        border-radius: 10px;
+        max-height: 70vh;
+        overflow-y: auto;
     }
 
+    /* Si tienes otros estilos de .form-propietario o columnas, ajústalos para mayor adaptabilidad */
     .form-propietario {
         flex-direction: column;
         gap: 10px;
@@ -165,11 +170,12 @@ body {
 
     .form-column2 {
         width: 100%;
-        padding: 10px;
+        padding: 0;
     }
 
     #btnEnviarRegistro {
-        width: 80%;
+        width: 100%;
+        margin-top: 20px;
     }
 
     #btnNewMedidor {
@@ -183,14 +189,13 @@ body {
         /* antes era 20px */
         left: 50%;
         transform: translateX(-50%);
-        width: 40%;
+        width: 90%;
         max-width: 400px;
         padding: 20px;
         background-color: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-
 
 }
 
@@ -526,27 +531,17 @@ select {
 }
 
 #contenedor-registros {
-    background: rgb(223, 223, 223);
-    padding: 20px;
-    border-radius: 10px;
     position: absolute;
     top: 300px;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
-    max-height: 100vh;
+    background: rgb(223, 223, 223);
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-height: 70vh;
     overflow-y: auto;
-    box-sizing: border-box;
-    max-width: 600px;
-    backdrop-filter: blur(60px);
-    -webkit-backdrop-filter: blur(50px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    z-index: 900;
-    font-size: 14px;
-    gap: 10px;
-    color: black;
-    font-style: normal;
-    font-family: Arial, sans-serif;
 }
 
 .form-propietario {
