@@ -185,7 +185,7 @@ body {
 
     #form-container {
         position: absolute;
-        margin-top: 200px;
+        margin-top: 130px;
         /* antes era 20px */
         left: 50%;
         transform: translateX(-50%);
