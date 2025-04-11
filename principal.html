@@ -353,7 +353,7 @@
                 tablaRecibos.classList.add("hidden");
                 contenedorRegistros.classList.add("hidden");
 
-                // Mostrar solo la sección correspondiente
+                // Mostrar sólo la sección correspondiente
                 seccionMostrada.classList.remove("hidden");
 
                 // Mostrar u ocultar el botón según la sección activa
@@ -365,7 +365,7 @@
                     }
                 }
 
-                // Mostrar u ocultar encabezado y stats
+                // Mostrar u ocultar encabezado y estadísticas
                 if (seccionMostrada === contenedorRegistros) {
                     textHeader.style.display = "none";
                     statsContainer.style.display = "none";
@@ -374,9 +374,10 @@
                     statsContainer.style.display = "flex";
                 }
 
-                // Ocultar o mostrar búsqueda si es móvil
+                // Llamada para ocultar o mostrar la búsqueda móvil
                 ocultarBusquedaSiMovil(seccionMostrada);
             }
+
 
             // INICIO
             menuInicio.addEventListener("click", function (event) {
@@ -707,6 +708,7 @@
         });
 
         //hacer foco en el input de busqueda movil
+        const searchInput = document.getElementById("busqueda-movil");
         searchInput.addEventListener('focus', () => {
             document.querySelector('.mobile-search-container').style.top = '10px';
         });
