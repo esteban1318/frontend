@@ -128,7 +128,7 @@ body {
 
     .mobile-search-container {
         display: block;
-        position: absolute;
+        position: fixed;
         top: 230px;
         left: 46%;
         transform: translateX(-50%);
