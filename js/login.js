@@ -28,9 +28,9 @@ function validarLogin() {
 
             // Redirige según el rol
             if (data.rol === "administrador") {
-                window.location.href = "admin.html";
+                window.location.href = "principal.html";
             } else if (data.rol === "vigilante") {
-                window.location.href = "vigilante.html";
+                window.location.href = "principal.html";
             } else {
                 window.location.href = "principal.html";
             }
