@@ -133,8 +133,9 @@
      }
 
      #rol {
-         position: relative;
-         left: 360px;
+         align-items: right;
+         justify-content: right;
+         top: 300px;
      }
  }
 
@@ -178,9 +179,9 @@
  }
 
  #rol {
-     position: relative;
-     top: 240px;
-     left: 250px;
+     position: fixed;
+     top: 390px;
+     left: 280px;
      background-color: rgba(50, 50, 50, 0.3);
      color: bisque;
      border-radius: 10px;
