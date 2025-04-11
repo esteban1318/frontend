@@ -652,16 +652,14 @@
 
             tbody.appendChild(fila);
         });
-
-        const searchInput = document.getElementById("busqueda-movil");
-
         searchInput.addEventListener('focus', () => {
-            document.querySelector('.mobile-search-container').style.top = '10px';
+            document.querySelector('.mobile-search-container').classList.add('search-fixed');
         });
 
         searchInput.addEventListener('blur', () => {
-            document.querySelector('.mobile-search-container').style.top = '230px';
+            document.querySelector('.mobile-search-container').classList.remove('search-fixed');
         });
+
     </script>
 
     <script src="/js/login.js"></script>

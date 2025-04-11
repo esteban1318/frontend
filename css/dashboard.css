@@ -127,12 +127,16 @@ body {
     }
 
     .mobile-search-container {
-        position: absolute;
+        position: fixed;
         top: 230px;
-        left: 47%;
-        transform: translateX(-50%);
+        left: -40px;
+        right: 0;
+        margin: 0 auto;
         width: 80%;
-        z-index: 900;
+        z-index: 500;
+        background-color: white;
+        padding: 10px;
+        transition: top 0.3s ease;
 
     }
 
@@ -143,6 +147,10 @@ body {
         border-radius: 5px;
         font-size: 14px;
         display: block;
+    }
+
+    .mobile-search-container:has(input:focus) {
+        top: 10px;
     }
 
     #contenedor-registros {
