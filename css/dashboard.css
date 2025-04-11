@@ -146,12 +146,12 @@ body {
         display: block;
     }
 
-    #contenedor-registros {
+    /*#contenedor-registros {
         align-items: center;
         flex-direction: column;
         position: absolute;
         margin-top: 160px;
-        /* antes era 20px */
+       
         left: 50%;
         transform: translateX(-50%);
         width: 275px !important;
@@ -161,7 +161,7 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Si tienes otros estilos de .form-propietario o columnas, ajústalos para mayor adaptabilidad */
+   
     .form-propietario {
         flex-direction: column;
         padding: 0px;
@@ -189,7 +189,7 @@ body {
     #btnEnviarRegistro {
         width: 100%;
         margin-top: 20px;
-    }
+    }*/
 
     #btnNewMedidor {
         border-radius: 3px;
