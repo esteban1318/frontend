@@ -127,10 +127,9 @@ body {
     }
 
     .mobile-search-container {
-        display: block;
-        position: fixed;
+        position: absolute;
         top: 230px;
-        left: 46%;
+        left: 47%;
         transform: translateX(-50%);
         width: 80%;
         z-index: 900;
@@ -146,12 +145,12 @@ body {
         display: block;
     }
 
-    /*#contenedor-registros {
+    #contenedor-registros {
         align-items: center;
         flex-direction: column;
         position: absolute;
         margin-top: 160px;
-       
+
         left: 50%;
         transform: translateX(-50%);
         width: 275px !important;
@@ -161,7 +160,7 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-   
+
     .form-propietario {
         flex-direction: column;
         padding: 0px;
@@ -189,7 +188,7 @@ body {
     #btnEnviarRegistro {
         width: 100%;
         margin-top: 20px;
-    }*/
+    }
 
     #btnNewMedidor {
         border-radius: 3px;
