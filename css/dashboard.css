@@ -129,7 +129,7 @@ body {
     .mobile-search-container {
         display: block;
         position: fixed;
-        top: 220px;
+        top: 230px;
         left: 46%;
         transform: translateX(-50%);
         width: 80%;
@@ -198,8 +198,8 @@ body {
     }
 
     #form-container {
-        position: absolute;
-        margin-top: 60px;
+        position: static;
+        margin-top: 0px !important;
         /* antes era 20px */
         left: 50%;
         transform: translateX(-50%);
