@@ -128,11 +128,11 @@ body {
 
     .mobile-search-container {
         display: block;
-        position: fixed;
-        top: 230px;
+        position: relative;
+        top: 220px;
         left: 46%;
         transform: translateX(-50%);
-        width: 80%;
+        width: 90%;
         z-index: 900;
 
     }
@@ -193,11 +193,12 @@ body {
 
     #btnNewMedidor {
         border-radius: 3px;
+        margin: 30px;
 
     }
 
     #form-container {
-        position: absolute;
+        position: relative;
         margin-top: 60px;
         /* antes era 20px */
         left: 50%;
@@ -208,6 +209,10 @@ body {
         background-color: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #estado {
+        margin: -2px auto;
     }
 
 }
