@@ -294,17 +294,17 @@
             let tabla = document.getElementById("miTabla");
             let filas = tabla.getElementsByTagName("tr");
 
-            for (let i = 1; i < filas.length; i++) { // Comenzamos en 1 para evitar el encabezado
+            for (let i = 1; i < filas.length; i++) {
                 let celdas = filas[i].getElementsByTagName("td");
                 let mostrar = false;
 
                 for (let j = 0; j < celdas.length; j++) {
-                    if (celdas[j].innerText.toLowerCase().includes(filtro)) {
+                    let textoCelda = celdas[j].innerText.toLowerCase();
+                    if (textoCelda.includes(filtro)) {
                         mostrar = true;
                         break;
                     }
-                    // Aplicar clase "estado-entregado" si el texto es "Entregado"
-                    if (textoCelda.trim() === "Entregado") {
+                    if (textoCelda.trim() === "entregado") {
                         celdas[j].classList.add("estado-entregado");
                     } else {
                         celdas[j].classList.remove("estado-entregado");
@@ -326,7 +326,7 @@
             const contenedorRegistros = document.getElementById("contenedor-registros");
             const btnMedidor = document.getElementById("btnMedidor");
             const inputBusqueda = document.getElementById("inputBusqueda");
-            const searchContainer = document.querySelector(".mobile-search-container"); // 🔍 contenedor del input
+            const searchContainer = document.querySelector(".mobile-search-container");
 
             const textHeader = document.getElementById("textHeader");
             const statsContainer = document.getElementById("statusContainer");
@@ -346,93 +346,66 @@
                     if (searchContainer) searchContainer.classList.remove("hidden");
                 }
             }
-        });
-        function mostrarSeccion(seccionMostrada) {
-            // Ocultar todas las secciones
-            tablaResidentes.classList.add("hidden");
-            tablaRecibos.classList.add("hidden");
-            contenedorRegistros.classList.add("hidden");
 
-            // Mostrar sólo la sección correspondiente
-            seccionMostrada.classList.remove("hidden");
+            function mostrarSeccion(seccionMostrada) {
+                tablaResidentes.classList.add("hidden");
+                tablaRecibos.classList.add("hidden");
+                contenedorRegistros.classList.add("hidden");
 
-            // Mostrar u ocultar el botón según la sección activa
-            if (btnMedidor) {
-                if (seccionMostrada === tablaResidentes || seccionMostrada === tablaRecibos) {
-                    btnMedidor.style.display = "block";
-                } else {
-                    btnMedidor.style.display = "none";
+                seccionMostrada.classList.remove("hidden");
+
+                if (btnMedidor) {
+                    btnMedidor.style.display = (seccionMostrada === tablaResidentes || seccionMostrada === tablaRecibos) ? "block" : "none";
                 }
+
+                textHeader.style.display = (seccionMostrada === contenedorRegistros) ? "none" : "block";
+                statsContainer.style.display = (seccionMostrada === contenedorRegistros) ? "none" : "flex";
+
+                ocultarBusquedaSiMovil(seccionMostrada);
             }
 
-            // Mostrar u ocultar encabezado y estadísticas
-            if (seccionMostrada === contenedorRegistros) {
-                textHeader.style.display = "none";
-                statsContainer.style.display = "none";
-            } else {
+            menuInicio.addEventListener("click", function (event) {
+                event.preventDefault();
+                tablaResidentes.classList.add("hidden");
+                tablaRecibos.classList.add("hidden");
+                contenedorRegistros.classList.add("hidden");
                 textHeader.style.display = "block";
                 statsContainer.style.display = "flex";
-            }
 
-            // Llamada para ocultar o mostrar la búsqueda móvil
-            ocultarBusquedaSiMovil(seccionMostrada);
-        }
+                if (btnMedidor) btnMedidor.style.display = "none";
+                ocultarBusquedaSiMovil(null);
+            });
 
+            menuResidentes.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(tablaResidentes);
+            });
 
-        // INICIO
-        menuInicio.addEventListener("click", function (event) {
-            event.preventDefault();
-            tablaResidentes.classList.add("hidden");
-            tablaRecibos.classList.add("hidden");
-            contenedorRegistros.classList.add("hidden");
-            textHeader.style.display = "block";
-            statsContainer.style.display = "flex";
+            menuRecibos.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(tablaRecibos);
+            });
 
-            if (btnMedidor) btnMedidor.style.display = "none";
+            menuRegistros.addEventListener("click", function (event) {
+                event.preventDefault();
+                mostrarSeccion(contenedorRegistros);
+            });
 
-            ocultarBusquedaSiMovil(null); // inicio no tiene sección activa
+            window.addEventListener("resize", () => {
+                const activeSection = document.querySelector(".content-container:not(.hidden)");
+                ocultarBusquedaSiMovil(activeSection);
+            });
         });
-
-        // RESIDENTES
-        menuResidentes.addEventListener("click", function (event) {
-            event.preventDefault();
-            mostrarSeccion(tablaResidentes);
-        });
-
-        // RECIBOS
-        menuRecibos.addEventListener("click", function (event) {
-            event.preventDefault();
-            mostrarSeccion(tablaRecibos);
-        });
-
-        // REGISTROS
-        menuRegistros.addEventListener("click", function (event) {
-            event.preventDefault();
-            mostrarSeccion(contenedorRegistros);
-        });
-
-        // Detectar cambio de tamaño de ventana
-        window.addEventListener("resize", () => {
-            const activeSection = document.querySelector("#tabla-residentes:not(.hidden), #tabla-recibos:not(.hidden)");
-            ocultarBusquedaSiMovil(activeSection);
-        });
-
-
-
 
         document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
-        setInterval(actualizarTablaConFiltro, 5000); // Actualiza cada 10 segundos
+        setInterval(actualizarTablaConFiltro, 5000);
 
         function actualizarTablaConFiltro() {
-            let filtroActual = (document.getElementById("busqueda").value ||
-                document.getElementById("busqueda-movil").value).toLowerCase().trim();
-
-            cargarDatosDesdePHP(); // Actualiza la tabla con los nuevos datos
-
+            let filtroActual = (document.getElementById("busqueda").value || document.getElementById("busqueda-movil").value).toLowerCase().trim();
+            cargarDatosDesdePHP();
             setTimeout(() => {
-                // Aplicar nuevamente el filtro después de la actualización
                 filtrarTabla();
-            }, 500); // Pequeño retraso para asegurarse de que los datos ya se actualizaron
+            }, 500);
         }
 
         function filtrarTabla() {
@@ -445,9 +418,9 @@
 
             let tabla;
             if (!tablaResidentes.classList.contains("hidden")) {
-                tabla = document.getElementById("miTabla"); // Residentes
+                tabla = document.getElementById("miTabla");
             } else if (!tablaRecibos.classList.contains("hidden")) {
-                tabla = document.getElementById("miTabla2"); // Recibos
+                tabla = document.getElementById("miTabla2");
             }
 
             if (!tabla) {
@@ -472,6 +445,7 @@
                 filas[i].style.display = mostrar ? "" : "none";
             }
         }
+
         const API_URL = "https://mi-backend-production-9444.up.railway.app";
 
         function actualizarFilas(medidores) {
@@ -485,13 +459,10 @@
             const datosPorClave = {};
 
             medidores.sort((a, b) => {
-                if (a.torre !== b.torre) {
-                    return a.torre.localeCompare(b.torre);
-                }
+                if (a.torre !== b.torre) return a.torre.localeCompare(b.torre);
                 return a.apartamento.localeCompare(b.apartamento);
             });
 
-            // Mapear medidores nuevos
             medidores.forEach(medidor => {
                 const clave = `${medidor.torre}-${medidor.apartamento}`;
                 clavesNuevas.add(clave);
@@ -501,12 +472,10 @@
             const filasActuales = Array.from(tabla.rows);
             const clavesActuales = new Set();
 
-            // Actualizar o eliminar filas existentes
             filasActuales.forEach(fila => {
                 const torre = fila.cells[0]?.textContent.trim();
                 const apto = fila.cells[1]?.textContent.trim();
                 const clave = `${torre}-${apto}`;
-
                 clavesActuales.add(clave);
 
                 if (!clavesNuevas.has(clave)) {
@@ -542,23 +511,22 @@
                 }
             });
 
-            // Agregar filas nuevas manteniendo el orden
             clavesNuevas.forEach(clave => {
                 if (!clavesActuales.has(clave)) {
                     const medidor = datosPorClave[clave];
                     const fila = document.createElement("tr");
-
                     const estadoNormalizado = medidor.estado.trim().toLowerCase();
+
                     if (estadoNormalizado === "entregado") {
                         fila.classList.add("fila-entregado");
                     }
 
                     fila.innerHTML = `
-                <td>${medidor.torre}</td>
-                <td>${medidor.apartamento}</td>
-                <td>${medidor.medidor}</td>
-<td><span class="estado-${estadoNormalizado}">${medidor.estado}</span></td>
-            `;
+                        <td>${medidor.torre}</td>
+                        <td>${medidor.apartamento}</td>
+                        <td>${medidor.medidor}</td>
+                        <td><span class="estado-${estadoNormalizado}">${medidor.estado}</span></td>
+                    `;
 
                     const filas = Array.from(tabla.rows);
                     let insertado = false;
@@ -583,23 +551,20 @@
             });
         }
 
-
         function cargarDatosDesdePHP() {
             fetch("https://mi-backend-production-9444.up.railway.app/api/medidores")
                 .then(response => response.json())
                 .then(data => {
-                    actualizarFilas(data); // Solo añade las filas nuevas sin borrar las existentes
-                    filtrarTabla(); // Mantiene la búsqueda activa después de actualizar la tabla
+                    actualizarFilas(data);
+                    filtrarTabla();
                 })
                 .catch(error => console.error("Error al cargar datos:", error));
         }
-
 
         document.addEventListener("DOMContentLoaded", function () {
             const menuToggle = document.getElementById("menu-toggle");
             const sidebar = document.getElementById("sidebar");
 
-            // Verifica si existen antes de agregar eventos
             if (menuToggle && sidebar) {
                 menuToggle.addEventListener("click", () => {
                     sidebar.classList.toggle("show");
@@ -610,62 +575,46 @@
                         sidebar.classList.remove("show");
                     }
                 });
-            } else {
-                console.error("Error: No se encontró el botón o la sidebar en el DOM.");
             }
         });
 
         document.getElementById("cerrarSesion").addEventListener("click", function () {
             localStorage.removeItem("usuarioLogueado");
-            window.location.href = "index.html"; // Redirigir al login
+            window.location.href = "index.html";
         });
+
         document.getElementById("btnMedidor").addEventListener("click", function () {
             let formContainer = document.getElementById("form-container");
-            formContainer.classList.toggle("hidden"); // Alterna la clase "hidden"
+            formContainer.classList.toggle("hidden");
         });
 
-        //agregar dato a mi tabla medidores
-
         document.getElementById("medidorForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Evitar recarga de la página
+            event.preventDefault();
 
-            // Obtener los valores del formulario
             let torre = document.getElementById("torreMedidor").value.trim();
             let apartamento = document.getElementById("apartamento").value.trim();
             let medidor = document.getElementById("medidor").value.trim();
             let estado = document.getElementById("estado").value;
 
-            // Crear el objeto con los datos
-            let datos = {
-                torre: torre,
-                apartamento: apartamento,
-                medidor: medidor,
-                estado: estado
-            };
+            let datos = { torre, apartamento, medidor, estado };
 
-            console.log("Datos enviados al backend:", datos);
-
-
-            // Enviar la petición al backend
             fetch("https://mi-backend-production-9444.up.railway.app/api/medidores", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(datos)
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Medidor agregado:", data);
                     alert("Medidor agregado correctamente");
-                    document.getElementById("medidorForm").reset(); // Limpiar formulario
-                    cargarDatosDesdePHP(); // Actualizar la tabla con los nuevos datos
+                    document.getElementById("medidorForm").reset();
+                    cargarDatosDesdePHP();
                 })
                 .catch(error => {
                     console.error("Error al agregar medidor:", error);
                     alert("Hubo un error al agregar el medidor.");
                 });
         });
+
         document.addEventListener("DOMContentLoaded", function () {
             function toggleVisibility(selectId, targetId) {
                 const selectElement = document.getElementById(selectId);
@@ -678,7 +627,6 @@
                 }
             }
 
-            // Aplicar a cada select con funcionalidad de mostrar/ocultar
             toggleVisibility("segundoProp", "segundoPropietario");
             toggleVisibility("vehiculo", "vehiculoInfo");
             toggleVisibility("moto", "motoInfo");
@@ -689,8 +637,6 @@
 
         datos.forEach(dato => {
             const fila = document.createElement("tr");
-
-            // Normaliza el valor del estado
             const estadoNormalizado = dato.estado.trim().toLowerCase();
 
             if (estadoNormalizado === "entregado") {
@@ -698,27 +644,26 @@
             }
 
             fila.innerHTML = `
-        <td>${dato.torre}</td>
-        <td>${dato.apartamento}</td>
-        <td>${dato.medidor}</td>
-        <td>${dato.estado}</td>
-    `;
+                <td>${dato.torre}</td>
+                <td>${dato.apartamento}</td>
+                <td>${dato.medidor}</td>
+                <td>${dato.estado}</td>
+            `;
 
             tbody.appendChild(fila);
         });
 
-        //hacer foco en el input de busqueda movil
         const searchInput = document.getElementById("busqueda-movil");
+
         searchInput.addEventListener('focus', () => {
             document.querySelector('.mobile-search-container').style.top = '10px';
         });
 
-        //pierde foco en el input de busqueda movil
         searchInput.addEventListener('blur', () => {
             document.querySelector('.mobile-search-container').style.top = '230px';
         });
-
     </script>
+
     <script src="/js/login.js"></script>
 
 </body>
