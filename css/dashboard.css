@@ -129,7 +129,7 @@ body {
     .mobile-search-container {
         position: fixed;
         top: 210px;
-        left: -40px;
+        left: -45px;
         right: 0;
         margin: 0 auto;
         width: 80%;
@@ -553,14 +553,14 @@ select {
 
 #contenedor-registros {
     position: absolute;
-    top: 300px;
+    top: 296px;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgb(223, 223, 223);
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     width: 50%;
-    max-height: 70vh;
+    max-height: 87vh;
     overflow-y: auto;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
