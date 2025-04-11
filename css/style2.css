@@ -131,6 +131,11 @@
      button {
          font-size: 16px;
      }
+
+     #rol {
+         position: relative;
+         left: 220px;
+     }
  }
 
  #home {
