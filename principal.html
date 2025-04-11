@@ -391,11 +391,30 @@
                 mostrarSeccion(contenedorRegistros);
             });
 
+            // ✅ Agregado: proteger el input durante resize
+            let searchJustFocused = false;
+
+            if (searchContainer) {
+                const input = searchContainer.querySelector('input');
+                if (input) {
+                    input.addEventListener('focus', () => {
+                        searchJustFocused = true;
+                    });
+                    input.addEventListener('blur', () => {
+                        searchJustFocused = false;
+                    });
+                }
+            }
+
+            // ✅ Modificado: ahora respeta el enfoque del input
             window.addEventListener("resize", () => {
-                const activeSection = document.querySelector(".content-container:not(.hidden)");
-                ocultarBusquedaSiMovil(activeSection);
+                if (!searchJustFocused) {
+                    const activeSection = document.querySelector(".content-container:not(.hidden)");
+                    ocultarBusquedaSiMovil(activeSection);
+                }
             });
         });
+
 
         document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
         setInterval(actualizarTablaConFiltro, 5000);
@@ -652,13 +671,7 @@
 
             tbody.appendChild(fila);
         });
-        searchInput.addEventListener('focus', () => {
-            document.querySelector('.mobile-search-container').classList.add('search-fixed');
-        });
 
-        searchInput.addEventListener('blur', () => {
-            document.querySelector('.mobile-search-container').classList.remove('search-fixed');
-        });
 
     </script>
 
