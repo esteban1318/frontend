@@ -706,6 +706,16 @@
             tbody.appendChild(fila);
         });
 
+        //hacer foco en el input de busqueda movil
+        searchInput.addEventListener('focus', () => {
+            document.querySelector('.mobile-search-container').style.top = '10px';
+        });
+
+        //pierde foco en el input de busqueda movil
+        searchInput.addEventListener('blur', () => {
+            document.querySelector('.mobile-search-container').style.top = '230px';
+        });
+
     </script>
     <script src="/js/login.js"></script>
 
