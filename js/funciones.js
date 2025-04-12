@@ -310,10 +310,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-//document.getElementById("cerrarSesion").addEventListener("click", function () {
- //   localStorage.removeItem("usuarioLogueado");
-   // window.location.href = "index.html";
-//});
+document.getElementById("cerrarSesion").addEventListener("click", function () {
+  localStorage.removeItem("usuarioLogueado");
+ window.location.href = "index.html";
+});
 
 document.getElementById("btnMedidor").addEventListener("click", function () {
     let formContainer = document.getElementById("form-container");
