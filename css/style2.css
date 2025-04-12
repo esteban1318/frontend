@@ -135,6 +135,7 @@
      #rol {
          font-size: 16px;
          background-color: rgba(70, 70, 70, 0.3);
+
      }
  }
 
@@ -178,10 +179,10 @@
  }
 
  #rol {
-     width: 60%;
+     width: 50%;
      padding: 10px;
-     margin: -10px 160px;
-     /* espacio arriba y abajo del select */
+     margin-left: auto;
+     margin-bottom: 10px;
      border-radius: 10px;
      border: none;
      background-color: rgba(50, 50, 50, 0.3);
