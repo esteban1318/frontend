@@ -27,7 +27,6 @@ function filtrarTabla() {
         filas[i].style.display = mostrar ? "" : "none";
     }
 }
-
 document.addEventListener("DOMContentLoaded", function () {
     const menuInicio = document.querySelector(".sidebar-nav li:nth-child(1) a");
     const menuResidentes = document.querySelector(".sidebar-nav li:nth-child(2) a");
@@ -68,7 +67,21 @@ document.addEventListener("DOMContentLoaded", function () {
         seccionMostrada.classList.remove("hidden");
 
         if (btnMedidor) {
-            btnMedidor.style.display = (seccionMostrada === tablaResidentes || seccionMostrada === tablaRecibos) ? "block" : "none";
+            // Mostrar el botón solo en la sección de Recibos
+            if (seccionMostrada === tablaRecibos) {
+                btnMedidor.style.display = "block"; // Mostrar el botón
+            } else {
+                btnMedidor.style.display = "none"; // Ocultar el botón
+            }
+        }
+
+        if(btnAgregarPropietario){
+            if(seccionMostrada === tablaResidentes) {
+                btnAgregarPropietario.style.display = "block"; // Mostrar el botón
+            }
+            else {
+                btnAgregarPropietario.style.display = "none"; // Ocultar el botón
+            }
         }
 
         textHeader.style.display = (seccionMostrada === contenedorRegistros) ? "none" : "block";
@@ -127,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", cargarDatosDesdePHP);
@@ -385,6 +399,10 @@ datos.forEach(dato => {
     tbody.appendChild(fila);
 });
 
+
+document.getElementById('btnAgregarPropietario').addEventListener('click', () => {
+    document.getElementById('formNuevoPropietario').style.display = 'block';
+});
 
 
 

@@ -128,7 +128,7 @@ body {
 
     .mobile-search-container {
         position: fixed;
-        top: 210px;
+        top: 220px;
         left: -45px;
         right: 0;
         margin: 0 auto;
@@ -693,4 +693,41 @@ select:hover {
 .fila-entregado {
     background-color: #fadbd8;
     /* Verde claro */
+}
+
+#formNuevoPropietario {
+    background: rgba(30, 80, 180, 0.7);
+    backdrop-filter: transparent;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    width: 260px;
+    position: absolute;
+    top: 180px;
+    right: 400px;
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(50px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 10);
+    z-index: 900;
+    display: none;
+}
+
+#apartamentoResidente {
+    width: 250px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+#btnPropietarioNuevo {
+    margin: 10px auto;
+}
+
+#btnAgregarPropietario {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 900 !important;
+    display: none;
 }

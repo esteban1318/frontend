@@ -35,7 +35,7 @@
                 <ul>
                     <li class="active"><a href="#"><span class="icon">🏠</span> Inicio</a></li>
                     <li><a href="#"><span class="icon">👤</span> Residentes</a></li>
-                    <li><a href="#"><span class="icon">🏢</span> Recibos</a></li>
+                    <li><a href="#"><span class="icon" id="opcionRecibos">🏢</span> Recibos</a></li>
                     <li><a href="#"><span class="icon">📊</span> Registros</a></li>
                     <li><a href="#"><span class="icon">⚙️</span> Configuración</a></li>
                 </ul>
@@ -243,6 +243,40 @@
 
             <button id="btnNewMedidor" type="submit">Enviar</button>
         </form>
+    </div>
+    <div id="formNuevoPropietario" class="hidden">
+        <h2>Nuevo residente</h2>
+        <form action="#" method="POST" id="residenteForm">
+
+            <label for="nombre"></label>
+            <br>
+            <input class="inputNombrePro" type="text" id="nombrePropietario" name="name"
+                placeholder="Example juan perez" style="font-style: italic;" required>
+
+            <label for="Torre"></label>
+            <br>
+            <select id="estado" name="estado" required>
+                <option value="Torre 1">Torre 1</option>
+                <option value="Torre 2">Torre 2</option>
+                <option value="Torre 4">Torre 4</option>
+            </select>
+
+
+            <label for="apartamento"></label>
+            <br>
+            <input class="inputApartamento" type="text" id="apartamentoResidente" name="apartamento"
+                placeholder="Apartamento 101,201..." style="font-style: italic;" required>
+
+            <label for="parqueadero"></label>
+            <br>
+            <input type="number" id="parqueadero" name="parqueadero" placeholder="Parqueadero 1,2,3,324..."
+                style="font-style: italic;" required>
+
+            <button id="btnPropietarioNuevo" type="submit">Enviar</button>
+        </form>
+    </div>
+    <div>
+        <button type="button" id="btnAgregarPropietario">Agregar</button>
     </div>
     <script src="/js/funciones.js"></script>
     <script src="/js/login.js"></script>
