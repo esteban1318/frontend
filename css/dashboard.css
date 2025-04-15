@@ -336,15 +336,18 @@ li:hover {
     text-align: center;
 }
 
+.table-scroll {
+    max-height: 300px;
+    /* o el alto que necesites */
+    overflow-y: auto;
+    display: block;
+}
+
 .residents-table {
     width: 100%;
-    max-height: 400px;
     border-collapse: collapse;
-    margin-top: 10px;
-    overflow-y: auto;
-
-
 }
+
 
 th {
     background-color: #cdcfd0;
