@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnMedidor = document.getElementById("btnMedidor");
     const inputBusqueda = document.getElementById("inputBusqueda");
     const searchContainer = document.querySelector(".mobile-search-container");
+    const btnAgregarPropietario = document.getElementById("btnAgregarPropietario");
+
 
     const textHeader = document.getElementById("textHeader");
     const statsContainer = document.getElementById("statusContainer");
@@ -139,7 +141,13 @@ document.addEventListener("DOMContentLoaded", function () {
             ocultarBusquedaSiMovil(activeSection);
         }
     });
+    const seccionActiva = document.querySelector(".content-container:not(.hidden)");
+    if (seccionActiva) {
+        mostrarSeccion(seccionActiva);
+    }
+
 });
+
 
 
 
@@ -399,10 +407,10 @@ datos.forEach(dato => {
     tbody.appendChild(fila);
 });
 
-
-document.getElementById('btnAgregarPropietario').addEventListener('click', () => {
-    document.getElementById('formNuevoPropietario').style.display = 'block';
+document.getElementById("btnPropietarioNuevo").addEventListener("click", function() {
+    document.getElementById("formNuevoPropietario").style.display = "block";
 });
+
 
 
 
